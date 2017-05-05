@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp">
+
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
+        android:scaleType="fitXY"
+        app:srcCompat="@drawable/logo_new" />
+
+    <com.example.indianic.baseproject.common.CustomTextview
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/imageView4"
+        android:layout_marginTop="6dp"
+        android:text="Mosaic Institue Of Design"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        app:font_name="@string/font_open_sans_bold" />
+
+    <com.example.indianic.baseproject.common.CustomTextview
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="6dp"
+        android:gravity="start|center"
+        android:text="9033082625"
+        android:textColor="@color/colorBlack"
+        app:font_name="@string/font_open_sans_bold" />
+
+    <com.example.indianic.baseproject.common.CustomTextview
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="8dp"
+        android:gravity="start|center"
+        android:text="info@mosaicdesigns.in "
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        app:font_name="@string/font_open_sans_bold" />
+
+    <com.example.indianic.baseproject.common.CustomTextview
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Vastrapur, Ahmedabad - 380015"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        app:font_name="@string/font_open_sans_bold" />
+
+    <com.example.indianic.baseproject.common.CustomTextview
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Gujarat, India. "
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"
+        app:font_name="@string/font_open_sans_bold" />
+
+</RelativeLayout>

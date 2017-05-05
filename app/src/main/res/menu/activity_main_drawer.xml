@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_pdf"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="PDF"
+            />
+        <item
+            android:id="@+id/nav_videos"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Videos" />
+        <item
+            android:id="@+id/nav_off_line_videos"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="OFF line videos" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_feedback"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Feedback" />
+            <item
+                android:id="@+id/nav_contact_us"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Contact us" />
+        </menu>
+    </item>
+
+</menu>

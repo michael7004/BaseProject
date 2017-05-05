@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#c3626b</color>
+    <color name="colorPrimaryDark">#c3626b</color>
+    <color name="colorAccent">#e09089</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorYoutube">#F3001A</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorRed">#F0453F</color>
+    <color name="colorGreen">#FF669900</color>
+
+
+
+</resources>
