@@ -1,5 +1,7 @@
 package com.example.indianic.baseproject.fragment;
 
+import android.app.FragmentManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,18 +16,20 @@ import com.example.indianic.baseproject.adapter.FragmentPdfAdapter;
 import java.util.ArrayList;
 
 /**
- * PdfFragment class created on 01/05/17.
+ * MyPdfFragment class created on 01/05/17.
  */
 
-public class PdfFragment extends BaseFragment {
+public class MyPdfFragment extends BaseFragment {
 
     private RecyclerView recyclerViewPdf;
     private ArrayList<String> arrayList;
     private FragmentPdfAdapter fragmentPdfAdapter;
     private GridLayoutManager lLayout;
+    private FragmentManager manager;
 
 
     private View view;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,20 +41,22 @@ public class PdfFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        ((MainActivity) getActivity()).setTitle("PDF");
+        ((MainActivity) getActivity()).setTitle("My Pdfs");
+//        ((MainActivity) getActivity()).setTitleColor(ContextCompat.getColor(context, R.color.colorWhite));
         recyclerViewPdf = (RecyclerView) view.findViewById(R.id.fragment_pdf_rv_main);
         arrayList = new ArrayList<>();
         arrayList.add("Tutorial");
-        arrayList.add("Advace concept of design");
+        arrayList.add("Unlock");
         arrayList.add("Example");
         arrayList.add("Tutorial");
-        arrayList.add("Mosaic guide book");
+        arrayList.add("Unlock");
         arrayList.add("Mosaic book");
         arrayList.add("Latest courde");
-        arrayList.add("Latest design technique");
-        arrayList.add("Trending");
+        arrayList.add("Latest");
+        arrayList.add("Unlock");
         arrayList.add("Fashion design");
-        fragmentPdfAdapter = new FragmentPdfAdapter(getActivity(), arrayList);
+        manager=getFragmentManager();
+        fragmentPdfAdapter = new FragmentPdfAdapter(getActivity(), arrayList,manager);
         recyclerViewPdf.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerViewPdf.setAdapter(fragmentPdfAdapter);
 

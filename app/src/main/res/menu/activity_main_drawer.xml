@@ -1,35 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
+            android:title="Home" />
         <item
             android:id="@+id/nav_pdf"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="PDF"
-            />
+            android:icon="@drawable/ic_nav_pdf"
+            android:title="My Pdfs" />
         <item
             android:id="@+id/nav_videos"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Videos" />
+            android:icon="@drawable/ic_nav_video"
+            android:title="My Videos" />
         <item
-            android:id="@+id/nav_off_line_videos"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="OFF line videos" />
+            android:id="@+id/nav_my_downloads"
+            android:icon="@drawable/ic_menu_download"
+            android:title="My Downloads" />
+        <item
+            android:id="@+id/nav_contact_us"
+            android:icon="@drawable/ic_nav_contact_us"
+            android:title="Contact Us" />
+        <item
+            android:id="@+id/nav_feed_back"
+            android:icon="@drawable/ic_nav_feedback"
+            android:title="Feedback" />
 
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_feedback"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Feedback" />
-            <item
-                android:id="@+id/nav_contact_us"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Contact us" />
-        </menu>
-    </item>
 
 </menu>

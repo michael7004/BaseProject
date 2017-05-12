@@ -34,6 +34,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     private Button btnSend;
     private ConstraintLayout svParent;
     private AsyncForgotPassword asyncForgotPassword;
+    private String success = "Success";
 
 
     @Override
@@ -169,13 +170,16 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
             if (isCancelled()) {
                 return;
             }
-            if (wsForgotPassword != null && wsForgotPassword.isSuccess()) {
-                Toast.makeText(ForgotPasswordActivity.this, "Thank you. Password reset link has been sent to your email, please check your email.", Toast.LENGTH_SHORT).show();
+            if (wsForgotPassword != null && wsForgotPassword.getSucessNew().equalsIgnoreCase(success)) {
+                Toast.makeText(ForgotPasswordActivity.this, wsForgotPassword.getMessage(), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 finish();
+
+
             } else {
                 showSnackbarNonSticky(svParent, wsForgotPassword != null ? "email is wrong" : null, true, ForgotPasswordActivity.this);
+
             }
         }
     }

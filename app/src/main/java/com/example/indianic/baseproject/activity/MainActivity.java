@@ -11,9 +11,10 @@ import android.view.MenuItem;
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.fragment.ContactUsFragment;
 import com.example.indianic.baseproject.fragment.FeedBackFragment;
-import com.example.indianic.baseproject.fragment.OffLineVideosFragment;
-import com.example.indianic.baseproject.fragment.PdfFragment;
-import com.example.indianic.baseproject.fragment.VideosFragment;
+import com.example.indianic.baseproject.fragment.HomeFragment;
+import com.example.indianic.baseproject.fragment.MyDownloadsFragment;
+import com.example.indianic.baseproject.fragment.MyVideosFragment;
+import com.example.indianic.baseproject.fragment.MyPdfFragment;
 import com.example.indianic.baseproject.utills.Utills;
 
 ;
@@ -30,7 +31,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        Utills.replaceFragment(MainActivity.this, new PdfFragment(), R.id.content_main_container);
+        Utills.replaceFragment(MainActivity.this, new HomeFragment(), R.id.content_main_container);
 
 
     }
@@ -88,22 +89,22 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-
         int id = item.getItemId();
-
-        if (id == R.id.nav_pdf) {
-            Utills.replaceFragment(MainActivity.this, new PdfFragment(), R.id.content_main_container);
+        if (id == R.id.nav_home) {
+            Utills.replaceFragment(MainActivity.this, new HomeFragment(), R.id.content_main_container);
+        } else if (id == R.id.nav_pdf) {
+            Utills.replaceFragment(MainActivity.this, new MyPdfFragment(), R.id.content_main_container);
         } else if (id == R.id.nav_videos) {
-            Utills.replaceFragment(MainActivity.this, new VideosFragment(), R.id.content_main_container);
+            Utills.replaceFragment(MainActivity.this, new MyVideosFragment(), R.id.content_main_container);
 
-        } else if (id == R.id.nav_off_line_videos) {
-            Utills.replaceFragment(MainActivity.this, new OffLineVideosFragment(), R.id.content_main_container);
+        } else if (id == R.id.nav_my_downloads) {
+            Utills.replaceFragment(MainActivity.this, new MyDownloadsFragment(), R.id.content_main_container);
 
-        } else if (id == R.id.nav_feedback) {
-
-            Utills.replaceFragment(MainActivity.this, new FeedBackFragment(), R.id.content_main_container);
         } else if (id == R.id.nav_contact_us) {
+
             Utills.replaceFragment(MainActivity.this, new ContactUsFragment(), R.id.content_main_container);
+        } else {
+            Utills.replaceFragment(MainActivity.this, new FeedBackFragment(), R.id.content_main_container);
 
         }
 

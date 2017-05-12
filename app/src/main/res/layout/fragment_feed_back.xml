@@ -1,44 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_feed_back_rl_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="@dimen/_5sdp">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <EditText
+        android:id="@+id/fragment_feed_back_et_info_area"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="92dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/logo_new" />
+        android:background="@drawable/drw_btn_round_corner"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:lines="6"
+        android:overScrollMode="always"
+        android:scrollHorizontally="false"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp">
-
-        <EditText
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Write your feedback" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/button2"
+    <com.example.indianic.baseproject.common.CustomButton
+        android:id="@+id/fragment_feed_back_btn_submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textInputLayout5"
-        android:layout_marginLeft="@dimen/_5sdp"
-        android:layout_marginRight="@dimen/_5sdp"
-        android:layout_marginTop="20dp"
-        android:background="@color/colorPrimary"
-        android:text="Submit"
-        android:textColor="@color/colorWhite" />
+        android:layout_below="@+id/fragment_feed_back_et_info_area"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/fragment_feedback_btn_submit"
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold" />
+
 </RelativeLayout>

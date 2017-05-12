@@ -10,7 +10,8 @@
         android:layout_height="@dimen/_70sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:scaleType="fitXY"
-        android:src="@drawable/logo_new" />
+        android:src="@drawable/logo_new"
+        android:visibility="invisible"/>
 
 
 </LinearLayout>

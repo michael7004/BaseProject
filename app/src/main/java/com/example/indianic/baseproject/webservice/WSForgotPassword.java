@@ -3,6 +3,8 @@ package com.example.indianic.baseproject.webservice;
 import android.content.Context;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
@@ -14,7 +16,15 @@ public class WSForgotPassword {
     private String message;
     private boolean success;
     private String code;
+    private String SucessNew;
 
+    public String getSucessNew() {
+        return SucessNew;
+    }
+
+    public void setSucessNew(String sucessNew) {
+        SucessNew = sucessNew;
+    }
 
     public WSForgotPassword(final Context context) {
         this.context = context;
@@ -63,7 +73,12 @@ public class WSForgotPassword {
         if (response != null && response.trim().length() > 0) {
             try {
 
-                success = true;
+
+                message=response;
+
+                JSONObject jsonObject=new JSONObject(response);
+                message=jsonObject.optString("message");
+                SucessNew = jsonObject.optString("error");;
             } catch (Exception e) {
                 e.printStackTrace();
             }

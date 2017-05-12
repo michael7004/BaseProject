@@ -8,29 +8,38 @@ import com.example.indianic.baseproject.R;
 
 
 /**
- * Created on 24/04/2017
+ * Created by M.T on 6 Oct, 2016.
  * <p>
  * Purpose of this class is to save data in preferance and retrive values from preferance througout the lifewcycle of application
  * This class is hold methods for storing and retriving values from preference.
  */
-public class UtillPreference {
+public class Preference {
 
-    private static UtillPreference mPreference;
+    private static Preference mPreference;
     public SharedPreferences mSharedPreferences;
 
+    public final String KEY_DEVICE_TOKEN = "KEY_DEVICE_TOKEN";
+    public final String KEY_LANG_ID = "KEY_LANG_ID";
+    public final String KEY_EMP_MASTER_ID = "KEY_EMP_MASTER_ID";
+    public final String KEY_JS_MASTER_ID = "KEY_JS_MASTER_ID";
+//    public final String KEY_JS_CITIZENSHIP = "KEY_JS_CITIZENSHIP";
 
-    private UtillPreference() {
+
+    //Umesh nepali has been working from here
+    public final static String PREFERENCE_IS_LOGIN = "isLogIn";
+
+    private Preference() {
         mSharedPreferences = BaseProjectApplication.mAppInstance.getSharedPreferences(BaseProjectApplication.mAppInstance.getString(R.string.app_name), Context.MODE_PRIVATE);
     }
 
     /**
      * @return the {@link SharedPreferences} object that will be used to save values in the application preference
      */
-    public static UtillPreference getInstance() {
+    public static Preference getInstance() {
         if (mPreference == null) {
-            mPreference = new UtillPreference();
+            mPreference = new Preference();
         }
-        return mPreference ;
+        return mPreference;
     }
 
     /**
@@ -44,7 +53,6 @@ public class UtillPreference {
         editor.putString(key, value);
         editor.apply();
     }
-
 
 
     /**
@@ -72,10 +80,22 @@ public class UtillPreference {
         editor.apply();
     }
 
+
     public void clearPreferenceData() {
         SharedPreferences.Editor editor = mSharedPreferences.edit();
         editor.clear();
-//        editor.putString(key, value);
+        editor.apply();
+    }
+
+    /**
+     * To delete particular value from the preference file
+     *
+     * @param key
+     */
+    public void clearPreferenceItem(String key) {
+
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.remove(key);
         editor.apply();
     }
 

@@ -29,6 +29,8 @@
             app:srcCompat="@drawable/logo_new"
             tools:layout_constraintLeft_creator="1"
             tools:layout_constraintRight_creator="1"
+            android:visibility="invisible"
+
             tools:layout_constraintTop_creator="1" />
 
         <android.support.design.widget.TextInputLayout
@@ -52,8 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/factivity_login_tv_hint_email"
+                android:text="numesh818@gmail.com"
                 android:maxLines="1"
-                android:text="numesh818@gmail.com" />
+                />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -78,8 +81,9 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/factivity_login_tv_hint_password"
                 android:inputType="textPassword"
-                android:maxLines="1"
                 android:text="123456"
+                android:maxLines="1"
+
 
                 />
         </android.support.design.widget.TextInputLayout>

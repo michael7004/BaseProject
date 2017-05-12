@@ -7,6 +7,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.indianic.baseproject.R;
+import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
 
 /**
  * Created by umesh nepali 21 apr 2017.
@@ -65,13 +67,20 @@ public class SplashActivity extends BaseActivity {
         @Override
         public void run() {
 
+            boolean isLogin = Preference.getInstance().mSharedPreferences.getBoolean(Constants.PRE_IS_LOGIN,false);
 
-            final Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(loginIntent);
-            overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
-            finish();
+            if (isLogin) {
+                final Intent loginIntent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(loginIntent);
+                overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
+                finish();
+            } else {
+                final Intent loginIntent = new Intent(SplashActivity.this, LoginActivity.class);
+                startActivity(loginIntent);
+                overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
+                finish();
 
-
+            }
         }
     };
 

@@ -2,8 +2,6 @@ package com.example.indianic.baseproject.utills;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -145,6 +143,23 @@ public class Utills {
         return mDialog;
     }
 
+    public static ProgressDialog showProgressDialogNew(final Context mActivity, final String message, boolean isCancelable) {
+        final ProgressDialog mDialog = new ProgressDialog(mActivity, R.style.customeDialog);
+        mDialog.show();
+        mDialog.setCancelable(false);
+        mDialog.setCanceledOnTouchOutside(false);
+        //mDialog.setMessage(message);
+        mDialog.setProgressStyle(android.R.style.Widget_ProgressBar_Small);
+        return mDialog;
+    }
+
+    public static final void dismissProgressDialogNew(ProgressDialog progressDialog) {
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+    }
+
+
     /**
      * Method to dismiss progress dialog
      *
@@ -166,6 +181,7 @@ public class Utills {
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
         alertDialog.setCancelable(false);
         alertDialog.setMessage(msg);
+
         alertDialog.setPositiveButton(context.getString(android.R.string.ok), new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
@@ -173,6 +189,7 @@ public class Utills {
             }
         });
         alertDialog.show();
+
     }
 
 
@@ -288,6 +305,31 @@ public class Utills {
         return snackbar;
     }
 
+    public static void displayDialog(final Activity context, final String title, final String msg, final String strPositiveText, final String strNegativeText,
+                                     final boolean isNagativeBtn, final boolean isFinish) {
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+        dialog.setTitle(title);
+        dialog.setCancelable(false);
+        dialog.setMessage(msg);
+        dialog.setPositiveButton(strPositiveText, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+                if (isFinish) {
+                    context.finish();
+                }
+            }
+        });
+        if (isNagativeBtn) {
+            dialog.setNegativeButton(strNegativeText, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.dismiss();
+                }
+            });
+        }
+        dialog.show();
+    }
+
+
     /**
      * Removes last comma from any data
      *
@@ -349,7 +391,7 @@ public class Utills {
      *
      * @param fragment
      */
-    public static void replaceFragment(final Context context, final Fragment fragment, final int container) {
+    public static void replaceFragment(final Context context, final android.app.Fragment fragment, final int container) {
         ((Activity) context).getFragmentManager()
                 .beginTransaction()
                 .replace(container, fragment, fragment.getClass().getSimpleName())
@@ -362,15 +404,15 @@ public class Utills {
      * @param currentFragment
      * @param newFragment
      */
-    public static void addFragment(final Context context, final Fragment currentFragment, final Fragment newFragment, final int container) {
-        ((Activity) context).getFragmentManager()
-                .beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .add(container, newFragment, newFragment.getClass().getSimpleName())
-                .hide(currentFragment)
-                .addToBackStack(currentFragment.getClass().getSimpleName())
-                .commitAllowingStateLoss();
-    }
+//    public static void addFragment(final Context context, final Fragment currentFragment, final Fragment newFragment, final int container) {
+//        ((Activity) context).getFragmentManager()
+//                .beginTransaction()
+//                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+//                .add(container, newFragment, newFragment.getClass().getSimpleName())
+//                .hide(currentFragment)
+//                .addToBackStack(currentFragment.getClass().getSimpleName())
+//                .commitAllowingStateLoss();
+//    }
 
     /**
      * Parse dateformat as per requirement
@@ -419,6 +461,7 @@ public class Utills {
 
     /**
      * Encrypt message with secret key
+     *
      * @param message
      * @return
      */
@@ -442,6 +485,7 @@ public class Utills {
 
     /**
      * Convert char to bytes and used in encryption process
+     *
      * @param c
      * @return
      */
@@ -454,6 +498,7 @@ public class Utills {
 
     /**
      * Convert Hex string to byte array and used in encryption process
+     *
      * @param hexString
      * @return
      */
@@ -465,5 +510,6 @@ public class Utills {
         }
         return buffer;
     }
+
 
 }

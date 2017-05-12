@@ -30,5 +30,11 @@
     <string name="err_msg_enter_password">Please enter password</string>
     <string name="msg_no_internet">No internet. Please try after some time</string>
     <string name="err_msg_permission_write_phone">Permission to access write storage is required in order to continue</string>
+    <string name="fragment_feedback_btn_submit">Submit</string>
+    <string name="err_msg_enter_msg">Please enter message that you want to suggest us</string>
+    <string name="fragment_contact_us_tv_spannable_title">"<u>HEAD CENTER</u>"</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="pick_file">Pick file</string>
+    <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
 
 </resources>

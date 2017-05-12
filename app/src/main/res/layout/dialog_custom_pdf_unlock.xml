@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_30sdp"
+    android:background="@color/colorWhite"
+    android:gravity="center"
+    android:padding="@dimen/_5sdp">
+
+
+    <android.support.design.widget.TextInputLayout
+
+        android:id="@+id/fragment_cmmn_d_pdf_unlock_til_exam_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp">
+
+        <EditText
+            android:id="@+id/fragment_cmmn_d_pdf_unlock_et_exam_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter exam id " />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/fragment_cmmn_d_pdf_unlock_bnt_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_cmmn_d_pdf_unlock_til_exam_id"
+        android:background="@color/colorPrimaryDark"
+        android:text="Submit"
+        android:textColor="@color/colorWhite"
+
+        />
+</RelativeLayout>

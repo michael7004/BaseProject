@@ -21,7 +21,9 @@
         android:layout_gravity="start"
         android:background="#FFFFFF"
         android:fitsSystemWindows="true"
+        app:itemIconTint="@color/colorPrimaryDark"
         app:headerLayout="@layout/nav_header_main"
+        app:itemTextColor="@color/colorPrimaryDark"
         app:menu="@menu/activity_main_drawer" />
 
 

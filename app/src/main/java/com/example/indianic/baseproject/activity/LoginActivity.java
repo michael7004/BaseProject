@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
 import com.example.indianic.baseproject.utills.Utills;
 import com.example.indianic.baseproject.webservice.WSLogin;
 
@@ -193,7 +194,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 return;
             }
             if (wsLogin != null && wsLogin.isSuccess()) {
-//                UtillPreference.getInstance().savePreferenceData("IS_LOGIN",true);
+
+                Preference.getInstance().savePreferenceData(Constants.PRE_IS_LOGIN, true);
+                Preference.getInstance().savePreferenceData(Constants.PRE_USER_ID, wsLogin.getRegid());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 finish();

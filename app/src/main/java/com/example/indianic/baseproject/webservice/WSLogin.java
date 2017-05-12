@@ -17,12 +17,13 @@ public class WSLogin {
     private String message;
     private boolean success;
     private String code;
-    String email = "";
-    String fullname = "";
-    String examid = "";
-    String regstatus = "";
-    String actflag = "";
-    String delfalg = "";
+    private String regid = "";
+    private String email = "";
+    private String fullname = "";
+    private String examid = "";
+    private String regstatus = "";
+    private String actflag = "";
+    private String delfalg = "";
 
 
     public WSLogin(final Context context) {
@@ -39,6 +40,14 @@ public class WSLogin {
 
     public String getCode() {
         return code;
+    }
+
+    public String getRegid() {
+        return regid;
+    }
+
+    public void setRegid(String regid) {
+        this.regid = regid;
     }
 
     /**
@@ -73,33 +82,17 @@ public class WSLogin {
         if (response != null && response.trim().length() > 0) {
             try {
                 final WSConstants wsConstants = new WSConstants();
-
                 JSONArray jsonArray = new JSONArray(response);
                 JSONObject jsonObject = jsonArray.getJSONObject(0);
                 Log.d("Log", jsonObject.toString());
-                code = jsonObject.optString(wsConstants.PARAMS_ID);
+                regid = jsonObject.optString(wsConstants.PARAMS_ID);
                 email = jsonObject.optString(wsConstants.PARAMS_EMAIL);
                 fullname = jsonObject.optString(wsConstants.PARAMS_FNAME);
                 examid = jsonObject.optString(wsConstants.PARAMS_EXAMID);
                 regstatus = jsonObject.optString(wsConstants.PARAMS_REGSTATUS);
                 actflag = jsonObject.optString(wsConstants.PARAMS_ACTFLAG);
                 delfalg = jsonObject.optString(wsConstants.PARAMS_DELFLAG);
-                success=true;
-
-//                if (jsonObject.length() > 0) {
-//                    code = jsonObject.optInt(wsConstants.PARAMS_ID);
-//                    UtillPreference.getInstance().savePreferenceData("id", code);
-//                    success = true;
-////                    success = code == 1;
-//
-////                    message = jsonObject.optString(wsConstants.PARAMS_MESSAGE);
-////                    if (success) {
-////                        final JSONObject jsonObjectReturn = jsonObject.optJSONObject(wsConstants.PARAMS_RETURN);
-////                        result = jsonObjectReturn != null ? jsonObjectReturn.optString(wsConstants.PARAMS_CLIENT_HASH) : null;
-////                    }
-//                }
-
-
+                success = true;
             } catch (Exception e) {
                 e.printStackTrace();
             }

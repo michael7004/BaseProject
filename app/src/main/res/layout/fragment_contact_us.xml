@@ -1,83 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="@dimen/_5sdp">
+    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android" />
 
-
-    <ImageView
-        android:id="@+id/imageView4"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_70sdp"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/logo_new" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_10sdp">
 
-    <com.example.indianic.baseproject.common.CustomTextview
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView4"
-        android:layout_marginTop="6dp"
-        android:text="Mosaic Institue Of Design"
-        android:textColor="@color/colorBlack"
-        android:textSize="15sp"
-        app:font_name="@string/font_open_sans_bold" />
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_spannable_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="HEAD CENTER"
+            android:textColor="@color/colorPrimary"
+            app:font_name="@string/font_open_sans_bold" />
 
-    <com.example.indianic.baseproject.common.CustomTextview
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="6dp"
-        android:gravity="start|center"
-        android:text="9033082625"
-        android:textColor="@color/colorBlack"
-        app:font_name="@string/font_open_sans_bold" />
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_institute_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_spannable_title"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Mosaic Institue Of Design"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
 
-    <com.example.indianic.baseproject.common.CustomTextview
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="8dp"
-        android:gravity="start|center"
-        android:text="info@mosaicdesigns.in "
-        android:textColor="@color/colorBlack"
-        android:textSize="15sp"
-        app:font_name="@string/font_open_sans_bold" />
 
-    <com.example.indianic.baseproject.common.CustomTextview
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="Vastrapur, Ahmedabad - 380015"
-        android:textColor="@color/colorBlack"
-        android:textSize="15sp"
-        app:font_name="@string/font_open_sans_bold" />
+            app:font_name="@string/font_open_sans_bold" />
 
-    <com.example.indianic.baseproject.common.CustomTextview
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView4"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:text="Gujarat, India. "
-        android:textColor="@color/colorBlack"
-        android:textSize="15sp"
-        app:font_name="@string/font_open_sans_bold" />
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_spannable_title"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Mosaic Institue Of Design"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
 
-</RelativeLayout>
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_one"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="71-73, 1st Floor,Sardar Centre, Opp."
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+
+
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_three"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_two"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Vastrapur Lake, Vastrapur,"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_three"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Ahmedabad-380015, Gujarat ,India"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_extra"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="Timing:"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_five"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_extra"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_toRightOf="@+id/fragment_contact_us_tv_add_line_four"
+            android:text=" 10:30 am to 7.30 pm"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_six"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_five"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="We ara not working on wednesday"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_seven"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_six"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="OUR HELPLINE NUMBER"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_eight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_seven"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="1) 9033082625"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_nine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_eight"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:text="EMAIL"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_eleven"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="WEBSITE"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_twel"
+            android:layout_alignParentStart="true" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_twel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_nine"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="info@mosaicdesigns.in"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+        <com.example.indianic.baseproject.common.CustomTextview
+            android:id="@+id/fragment_contact_us_tv_add_line_thirty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/fragment_contact_us_tv_add_line_twel"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:text="mosaicdesigns.in"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            app:font_name="@string/font_open_sans_bold" />
+
+
+    </RelativeLayout>
+</ScrollView>
