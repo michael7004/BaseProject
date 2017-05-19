@@ -51,9 +51,19 @@ import com.example.indianic.baseproject.R;
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_common_dialog_pdf_view, container, false);
         final WebView wvPdf = (WebView) v.findViewById(R.id.fragment_cmnn_dl_vb_container);
-        wvPdf.getSettings().setJavaScriptEnabled(true);
+
         String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
-        wvPdf.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=" + pdf);
+        wvPdf.getSettings().setJavaScriptEnabled(true);
+        wvPdf.loadUrl(pdf);
+
+
+
+
+
+
+//        wvPdf.getSettings().setJavaScriptEnabled(true);
+//        String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
+//        wvPdf.loadUrl("http://drive.google.com/viewerng/viewer?embedded=true&url=" + pdf);
 
         return v;
     }

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -25,7 +26,7 @@ import android.widget.Toast;
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
 import com.example.indianic.baseproject.fragment.MyVideosFragment;
-import com.example.indianic.baseproject.model.VideosListModel;
+import com.example.indianic.baseproject.model.VidPdfListModel;
 
 import java.util.ArrayList;
 
@@ -35,10 +36,11 @@ import static android.content.Context.DOWNLOAD_SERVICE;
  * FragmentVideosAdapter class created on 05/05/17.
  */
 
-public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAdapter.MyViewHolder> {
+public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAdapter.MyViewHolder> {
 
-    private ArrayList<VideosListModel> videosListModels;
+//    http://mosaicdesigns.in/assets/videodownloads/32.pdf
 
+    private ArrayList<VidPdfListModel> vidPdfListModels;
 
     private Context context;
     private FragmentManager manager;
@@ -47,9 +49,9 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
     private long Image_DownloadId, Music_DownloadId;
 
 
-    public FragmentVideosAdapter(Context context, ArrayList<VideosListModel> videosListModels, FragmentManager manager) {
+    public FragmentVidPdfAdapter(Context context, ArrayList<VidPdfListModel> vidPdfListModels, FragmentManager manager) {
         this.context = context;
-        this.videosListModels = videosListModels;
+        this.vidPdfListModels = vidPdfListModels;
         this.manager = manager;
         //set filter to only when download is complete and register broadcast receiver
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
@@ -60,7 +62,7 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_fragment_video, parent, false);
+                .inflate(R.layout.row_fragment_vid_pdf, parent, false);
 
         return new MyViewHolder(itemView);
     }
@@ -69,11 +71,14 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
 
-        holder.tvTitle.setText(videosListModels.get(position).getFiletitle());
+        holder.tvTitle.setText(vidPdfListModels.get(position).getFiletitle());
         holder.ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
+
+
+                Log.d("positon", vidPdfListModels.get(position).getVdid());
+                String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".mp4";
                 if (MyVideosFragment.isVideos) {
                     final FragmentTransaction fragmentTransaction = manager.beginTransaction();
                     final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
@@ -82,9 +87,12 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
                     newFragment.setArguments(args);
                     newFragment.show(fragmentTransaction, "");
                 } else {
-                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
+
+                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf";
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
                     context.startActivity(browserIntent);
+
+
                 }
 
             }
@@ -105,16 +113,9 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
                         switch (item.getItemId()) {
                             case R.id.menu2:
                                 //handle menu1 click
-                                if (MyVideosFragment.isVideos) {
-                                    Toast.makeText(context, "Video Download started", Toast.LENGTH_SHORT).show();
-                                    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
-                                    Uri music_uri = Uri.parse(VideoURL);
-                                    Music_DownloadId = DownloadData(music_uri,videosListModels.get(position).getVdid() );
-                                } else {
-                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
-                                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
-                                    Image_DownloadId = DownloadData(image_uri,videosListModels.get(position).getVdid());
-                                }
+                                Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
+                                Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf");
+                                Image_DownloadId = DownloadData(image_uri, vidPdfListModels.get(position).getVdid());
                                 break;
 
                         }
@@ -131,7 +132,7 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
 
     @Override
     public int getItemCount() {
-        return videosListModels.size();
+        return vidPdfListModels.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -141,9 +142,9 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
 
         public MyViewHolder(View view) {
             super(view);
-            tvTitle = (TextView) view.findViewById(R.id.row_fragment_video_tv_title);
-            ivProfile = (ImageView) view.findViewById(R.id.row_fragment_video_iv_logo);
-            ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_video_iv_more_option);
+            tvTitle = (TextView) view.findViewById(R.id.row_fragment_vid_pdf_tv_title);
+            ivProfile = (ImageView) view.findViewById(R.id.row_fragment_vid_pdf_iv_logo);
+            ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_vid_pdf_iv_more_option);
 
 
         }
@@ -151,7 +152,7 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
 
     }
 
-    private long DownloadData(Uri uri,String id) {
+    private long DownloadData(Uri uri, String id) {
         long downloadReference;
         downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -161,11 +162,9 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
         request.setDescription("Android Data download using DownloadManager.");
         //Set the local destination for the downloaded file to a path within the application's external files directory
         if (MyVideosFragment.isVideos)
-            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id+".mp4");
-
-
+            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "mosaic.mp4");
         else {
-            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "mosaic.pdf");
+            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id + ".pdf");
         }
         //Enqueue download and save the referenceId
         downloadReference = downloadManager.enqueue(request);

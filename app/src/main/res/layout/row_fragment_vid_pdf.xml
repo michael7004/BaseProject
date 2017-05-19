@@ -22,7 +22,7 @@
             android:orientation="horizontal">
 
             <com.example.indianic.baseproject.common.SquareImageView
-                android:id="@+id/row_fragment_video_iv_logo"
+                android:id="@+id/row_fragment_vid_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
@@ -31,13 +31,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/row_fragment_video_iv_logo"
+                android:layout_below="@+id/row_fragment_vid_pdf_iv_logo"
                 android:orientation="horizontal"
                 android:weightSum="1">
 
                 <com.example.indianic.baseproject.common.CustomTextview
-                    android:id="@+id/row_fragment_video_tv_title"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/row_fragment_vid_pdf_tv_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_weight="1"
@@ -48,15 +48,12 @@
                     card_view:font_name="@string/font_open_sans_bold" />
 
                 <ImageView
-                    android:id="@+id/row_fragment_video_iv_more_option"
+                    android:id="@+id/row_fragment_vid_pdf_iv_more_option"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_more_vert_black_24dp" />
-
-
             </LinearLayout>
-
 
         </RelativeLayout>
 

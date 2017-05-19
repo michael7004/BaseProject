@@ -3,7 +3,10 @@ package com.example.indianic.baseproject.adapter;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,59 +15,64 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
-import com.example.indianic.baseproject.common.CommonDialogFragment;
 import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
 import com.example.indianic.baseproject.fragment.MyDownloadsFragment;
+import com.example.indianic.baseproject.model.OffLinePdfModel;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
  * FragmentPdfAdapter class created on 01/05/17.
  */
 
-public class FragmentOffLineAdapter extends RecyclerView.Adapter<FragmentOffLineAdapter.MyViewHolder> {
+public class FragmentOffLinePdfAdapter extends RecyclerView.Adapter<FragmentOffLinePdfAdapter.MyViewHolder> {
 
-    private ArrayList<String> horizontalList;
+    private ArrayList<OffLinePdfModel> offLinePdfModels;
     private Context context;
     private FragmentManager manager;
 
 
-    public FragmentOffLineAdapter(Context context, ArrayList<String> horizontalList, FragmentManager manager) {
+    public FragmentOffLinePdfAdapter(Context context, ArrayList<OffLinePdfModel> offLinePdfModels, FragmentManager manager) {
         this.context = context;
-        this.horizontalList = horizontalList;
-        this.manager=manager;
+        this.offLinePdfModels = offLinePdfModels;
+        this.manager = manager;
     }
 
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.row_fragment_off_line, parent, false);
+                .inflate(R.layout.row_fragment_off_line_pdf, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.tvTitle.setText(horizontalList.get(position));
+        holder.tvTitle.setText(offLinePdfModels.get(position).getTitle());
         holder.ivProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
-                if(MyDownloadsFragment.isVideos) {
+                if (MyDownloadsFragment.isVideos) {
                     final FragmentTransaction fragmentTransaction = manager.beginTransaction();
                     final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
                     newFragment.show(fragmentTransaction, "");
-                }
-                else
-                {
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogFragment.newInstance();
-                    newFragment.show(fragmentTransaction, "");
+                } else {
+                    File file = new File(offLinePdfModels.get(position).getPath());
+                    Uri path = Uri.fromFile(file);
+                    Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+                    pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    pdfOpenintent.setDataAndType(path, "application/pdf");
+                    try {
+                        context.startActivity(pdfOpenintent);
+                    } catch (ActivityNotFoundException e) {
+
+                    }
                 }
             }
         });
@@ -76,7 +84,7 @@ public class FragmentOffLineAdapter extends RecyclerView.Adapter<FragmentOffLine
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu_download);
+                popup.inflate(R.menu.options_menu_delete);
                 //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -84,7 +92,18 @@ public class FragmentOffLineAdapter extends RecyclerView.Adapter<FragmentOffLine
                         switch (item.getItemId()) {
                             case R.id.menu1:
                                 //handle menu1 click
-                                Toast.makeText(context, "This functionality not implemented yet from menu 1=" + position, Toast.LENGTH_SHORT).show();
+
+
+                                File fdelete = new File(offLinePdfModels.get(position).getPath());
+                                if (fdelete.exists()) {
+                                    if (fdelete.delete()) {
+                                        offLinePdfModels.remove(position);
+                                        notifyDataSetChanged();
+
+                                    } else {
+
+                                    }
+                                }
                                 break;
                         }
                         return false;
@@ -99,7 +118,7 @@ public class FragmentOffLineAdapter extends RecyclerView.Adapter<FragmentOffLine
 
     @Override
     public int getItemCount() {
-        return horizontalList.size();
+        return offLinePdfModels.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -109,9 +128,9 @@ public class FragmentOffLineAdapter extends RecyclerView.Adapter<FragmentOffLine
 
         public MyViewHolder(View view) {
             super(view);
-            tvTitle = (TextView) view.findViewById(R.id.row_fragment_off_line_tv_title);
-            ivProfile = (ImageView) view.findViewById(R.id.row_fragment_off_line_iv_logo);
-            ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_off_line_iv_more_option);
+            tvTitle = (TextView) view.findViewById(R.id.row_fragment_off_line_pdf_tv_title);
+            ivProfile = (ImageView) view.findViewById(R.id.row_fragment_off_line_pdf_iv_logo);
+            ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_off_line_pdf_iv_more_option);
 
         }
 

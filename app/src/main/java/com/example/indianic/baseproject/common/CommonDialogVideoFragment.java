@@ -26,8 +26,15 @@ import com.example.indianic.baseproject.R;
 public class CommonDialogVideoFragment extends DialogFragment {
 
     // Insert your Video URL
-    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/8.mp4";
+    private static String path ;
 
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        path = getArguments().getString("path");
+    }
 
     public static CommonDialogVideoFragment newInstance() {
         CommonDialogVideoFragment f = new CommonDialogVideoFragment();
@@ -76,7 +83,7 @@ public class CommonDialogVideoFragment extends DialogFragment {
                     getActivity());
             mediacontroller.setAnchorView(videoView);
             // Get the URL from String VideoURL
-            Uri video = Uri.parse(VideoURL);
+            Uri video = Uri.parse(path);
             videoView.setMediaController(mediacontroller);
             videoView.setVideoURI(video);
 

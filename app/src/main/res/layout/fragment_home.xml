@@ -6,6 +6,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical"
     android:padding="@dimen/_5sdp"
+    android:id="@+id/fragment_home_ll_parent"
     android:weightSum="1">
 
     <LinearLayout

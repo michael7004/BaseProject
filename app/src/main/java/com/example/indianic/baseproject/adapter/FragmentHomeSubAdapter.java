@@ -6,12 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.indianic.baseproject.R;
-import com.example.indianic.baseproject.model.AndroidVersion;
+import com.example.indianic.baseproject.model.ProductSliderModel;
 
 import java.util.ArrayList;
 
@@ -20,11 +19,11 @@ import java.util.ArrayList;
  */
 
 public class FragmentHomeSubAdapter extends RecyclerView.Adapter<FragmentHomeSubAdapter.ViewHolder> {
-    private ArrayList<AndroidVersion> android;
+    private ArrayList<ProductSliderModel> productSliderModel;
     private Context context;
 
-    public FragmentHomeSubAdapter(Context context, ArrayList<AndroidVersion> android) {
-        this.android = android;
+    public FragmentHomeSubAdapter(Context context, ArrayList<ProductSliderModel> productSliderModel) {
+        this.productSliderModel = productSliderModel;
         this.context = context;
     }
 
@@ -37,10 +36,12 @@ public class FragmentHomeSubAdapter extends RecyclerView.Adapter<FragmentHomeSub
     @Override
     public void onBindViewHolder(FragmentHomeSubAdapter.ViewHolder viewHolder, int i) {
 
-        viewHolder.tv_android.setText(android.get(i).getAndroid_version_name());
+//        viewHolder.tv_android.setText(ProductSliderModel.get(i).getA_psid());
+
+
         Glide.with(context)
-                .load(android.get(i).getAndroid_image_url())
-                .centerCrop()
+                .load("http://mosaicdesigns.in/assets/promotional-products/"+productSliderModel.get(i).getA_psid()+".png")
+
 //                .placeholder(R.drawable.loading_spinner)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -50,16 +51,16 @@ public class FragmentHomeSubAdapter extends RecyclerView.Adapter<FragmentHomeSub
 
     @Override
     public int getItemCount() {
-        return android.size();
+        return productSliderModel.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tv_android;
+        //        private TextView tv_android;
         private ImageView img_android;
 
         public ViewHolder(View view) {
             super(view);
-            tv_android = (TextView) view.findViewById(R.id.row_fragment_home_tv_title);
+//            tv_android = (TextView) view.findViewById(R.id.row_fragment_home_tv_title);
             img_android = (ImageView) view.findViewById(R.id.row_fragment_home_iv_logo);
         }
     }

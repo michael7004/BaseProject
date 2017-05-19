@@ -1,6 +1,8 @@
 package com.example.indianic.baseproject.fragment;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -9,10 +11,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.activity.MainActivity;
+import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
+import com.example.indianic.baseproject.utills.Utills;
+import com.example.indianic.baseproject.webservice.WSFeedback;
 
 import static com.example.indianic.baseproject.utills.Utills.showSnackbarNonSticky;
 
@@ -28,6 +33,8 @@ public class FeedBackFragment extends BaseFragment {
     private View view;
     private RelativeLayout svParent;
     private Context context;
+    private AsyncFeedback AsyncFeedback;
+    private String msg = "Feedback has been submitted successfully";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -61,9 +68,7 @@ public class FeedBackFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.fragment_feed_back_btn_submit:
                 if (validation()) {
-
-//      login(etEmail.getText().toString(), etPassWord.getText().toString());
-                    Toast.makeText(getActivity(), "This functionality not implemented yet", Toast.LENGTH_SHORT).show();
+                    feedBack(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID, ""), etMsgArea.getText().toString().trim());
                 }
 
                 break;
@@ -84,5 +89,63 @@ public class FeedBackFragment extends BaseFragment {
             return true;
         }
     }
+
+    /**
+     * API call for resend pin
+     *
+     * @param clientID
+     */
+    private void feedBack(String clientID, String password) {
+//        clientID = Utills.encrypt(clientID);
+//        password = Utills.encrypt(password);
+        if (Utills.isNetworkAvailable(getActivity()) && !TextUtils.isEmpty(clientID) && !TextUtils.isEmpty(password)) {
+            if (AsyncFeedback != null && AsyncFeedback.getStatus() == AsyncTask.Status.PENDING) {
+                AsyncFeedback.execute(clientID, password);
+            } else if (AsyncFeedback == null || AsyncFeedback.getStatus() == AsyncTask.Status.FINISHED) {
+                AsyncFeedback = new AsyncFeedback();
+                AsyncFeedback.execute(clientID, password);
+            }
+        } else {
+            Utills.showSnackbarNonSticky(svParent, getString(R.string.msg_no_internet), true, getActivity());
+        }
+    }
+
+    /**
+     * AsyncTask for FeedBack
+     */
+    private class AsyncFeedback extends AsyncTask<String, Void, String> {
+        private WSFeedback wsFeedback;
+        private ProgressDialog progressDialog;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            wsFeedback = new WSFeedback(getActivity());
+            progressDialog = Utills.showProgressDialog(getActivity(), getString(R.string.msg_loading), false);
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            return wsFeedback.executeService(params[0], params[1]);
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            Utills.dismissProgressDialog(progressDialog);
+            if (isCancelled()) {
+                return;
+            }
+            if (wsFeedback != null && wsFeedback.getMessage().equalsIgnoreCase(msg)) {
+                Utills.showSnackbarNonSticky(svParent, wsFeedback != null ? wsFeedback.getMessage() : null, true, getActivity());
+                etMsgArea.setText("");
+
+
+            } else {
+                Utills.showSnackbarNonSticky(svParent, wsFeedback != null ? "Something went wrong" : null, true, getActivity());
+            }
+        }
+    }
+
 
 }

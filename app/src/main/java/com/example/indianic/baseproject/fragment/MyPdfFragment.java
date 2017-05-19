@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class MyPdfFragment extends BaseFragment {
 
+//    http://mosaicdesigns.in/assets/videodownloads/32.pdf
+
     private RecyclerView recyclerViewPdf;
     private ArrayList<String> arrayList;
     private FragmentPdfAdapter fragmentPdfAdapter;
@@ -55,8 +57,8 @@ public class MyPdfFragment extends BaseFragment {
         arrayList.add("Latest");
         arrayList.add("Unlock");
         arrayList.add("Fashion design");
-        manager=getFragmentManager();
-        fragmentPdfAdapter = new FragmentPdfAdapter(getActivity(), arrayList,manager);
+        manager = getFragmentManager();
+        fragmentPdfAdapter = new FragmentPdfAdapter(getActivity(), arrayList, manager);
         recyclerViewPdf.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerViewPdf.setAdapter(fragmentPdfAdapter);
 

@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.DownloadManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +24,6 @@ import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.common.CommonDialogFragment;
-import com.example.indianic.baseproject.common.CommonDialogPdfViewFragment;
 import com.example.indianic.baseproject.utills.Utills;
 
 import java.util.ArrayList;
@@ -77,9 +77,19 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                         Utills.displayDialog(context, "You should unlock first to access this file");
 
                     } else {
-                        final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                        final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
-                        newFragment.show(fragmentTransaction, "");
+
+                        try {
+                            Intent intentUrl = new Intent(Intent.ACTION_VIEW);
+                            intentUrl.setDataAndType(Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf"), "application/pdf");
+                            intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            context.startActivity(intentUrl);
+                        } catch (ActivityNotFoundException e) {
+                            Toast.makeText(context, "No PDF Viewer Installed", Toast.LENGTH_LONG).show();
+                        }
+
+//                        final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+//                        final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
+//                        newFragment.show(fragmentTransaction, "");
                     }
                 }
             });
@@ -121,9 +131,13 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
             holder.ivProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
-                    newFragment.show(fragmentTransaction, "");
+                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
+                    context.startActivity(browserIntent);
+//                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+//                    final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
+//                    newFragment.show(fragmentTransaction, "");
+
 
 
                 }
