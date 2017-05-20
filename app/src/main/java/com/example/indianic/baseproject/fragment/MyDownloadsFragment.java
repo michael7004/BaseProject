@@ -90,11 +90,11 @@ public class MyDownloadsFragment extends BaseFragment {
                 if (offLinepdfArrayList.size() > 0) {
                     offLinepdfArrayList.clear();
                 }
-                String pdfPattern = ".pdf";
+                String pdfPattern = ".pdff";
                 for (int i = 0; i < list.length; i++)
 
                     if (list[i].getName().endsWith(pdfPattern)) {
-
+                        Log.d("PDF",list[i].getAbsolutePath());
                         OffLinePdfModel offLinePdfModel = new OffLinePdfModel();
                         offLinePdfModel.setId(list[i].getPath());
                         offLinePdfModel.setTitle(list[i].getName());
@@ -121,9 +121,11 @@ public class MyDownloadsFragment extends BaseFragment {
                 if (offLineVideArrayList.size() > 0) {
                     offLineVideArrayList.clear();
                 }
-                final String VideoPattern = ".mp4";
+                final String VideoPattern = ".mp44";
                 for (int i = 0; i < list.length; i++)
                     if (list[i].getName().endsWith(VideoPattern)) {
+
+                        Log.d("Video",list[i].getAbsolutePath());
                         OffLineVideoModel offLineVideoModel = new OffLineVideoModel();
                         offLineVideoModel.setId(list[i].getPath());
                         offLineVideoModel.setTitle(list[i].getName());

@@ -26,7 +26,7 @@
                 android:id="@+id/row_fragment_off_line_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/ic_pdf_icon"
                 android:scaleType="centerCrop" />
 
             <com.example.indianic.baseproject.common.CustomTextview
@@ -47,6 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
+
 
                 android:layout_below="@+id/row_fragment_off_line_pdf_iv_logo"
 

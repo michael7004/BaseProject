@@ -109,11 +109,11 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
                                     Toast.makeText(context, "Video Download started", Toast.LENGTH_SHORT).show();
                                     String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
                                     Uri music_uri = Uri.parse(VideoURL);
-                                    Music_DownloadId = DownloadData(music_uri,videosListModels.get(position).getVdid() );
+                                    Music_DownloadId = DownloadData(music_uri, videosListModels.get(position).getVdid());
                                 } else {
                                     Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
                                     Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
-                                    Image_DownloadId = DownloadData(image_uri,videosListModels.get(position).getVdid());
+                                    Image_DownloadId = DownloadData(image_uri, videosListModels.get(position).getVdid());
                                 }
                                 break;
 
@@ -144,24 +144,23 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
             tvTitle = (TextView) view.findViewById(R.id.row_fragment_video_tv_title);
             ivProfile = (ImageView) view.findViewById(R.id.row_fragment_video_iv_logo);
             ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_video_iv_more_option);
-
-
         }
 
 
     }
 
-    private long DownloadData(Uri uri,String id) {
+    private long DownloadData(Uri uri, String id) {
         long downloadReference;
         downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
+
         //Setting title of request
         request.setTitle("Data Download");
         //Setting description of request
         request.setDescription("Android Data download using DownloadManager.");
         //Set the local destination for the downloaded file to a path within the application's external files directory
         if (MyVideosFragment.isVideos)
-            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id+".mp4");
+            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id + ".mp44");
 
 
         else {

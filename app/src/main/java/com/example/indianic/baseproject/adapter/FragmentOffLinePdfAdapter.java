@@ -3,10 +3,8 @@ package com.example.indianic.baseproject.adapter;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.indianic.baseproject.R;
+import com.example.indianic.baseproject.common.CommonDialogPdfLibFragment;
 import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
 import com.example.indianic.baseproject.fragment.MyDownloadsFragment;
 import com.example.indianic.baseproject.model.OffLinePdfModel;
@@ -64,15 +63,24 @@ public class FragmentOffLinePdfAdapter extends RecyclerView.Adapter<FragmentOffL
                     newFragment.show(fragmentTransaction, "");
                 } else {
                     File file = new File(offLinePdfModels.get(position).getPath());
-                    Uri path = Uri.fromFile(file);
-                    Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
-                    pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    pdfOpenintent.setDataAndType(path, "application/pdf");
-                    try {
-                        context.startActivity(pdfOpenintent);
-                    } catch (ActivityNotFoundException e) {
 
-                    }
+
+                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                    final DialogFragment newFragment = CommonDialogPdfLibFragment.newInstance();
+                    Bundle args = new Bundle();
+                    args.putString("path", offLinePdfModels.get(position).getPath());
+                    newFragment.setArguments(args);
+                    newFragment.show(fragmentTransaction, "");
+
+//                    Uri path = Uri.fromFile(file);
+//                    Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
+//                    pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//                    pdfOpenintent.setDataAndType(path, "application/pdf");
+//                    try {
+//                        context.startActivity(pdfOpenintent);
+//                    } catch (ActivityNotFoundException e) {
+//
+//                    }
                 }
             }
         });

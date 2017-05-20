@@ -48,6 +48,7 @@ public class FeedBackFragment extends BaseFragment {
     public void initView(View view) {
         ((MainActivity) getActivity()).setTitle("FeedBack");
 //        ((MainActivity) getActivity()).setTitleColor(ContextCompat.getColor(context, R.color.colorWhite));
+
         etMsgArea = (EditText) view.findViewById(R.id.fragment_feed_back_et_info_area);
         svParent = (RelativeLayout) view.findViewById(R.id.fragment_feed_back_rl_container);
         btnSubmit = (Button) view.findViewById(R.id.fragment_feed_back_btn_submit);
@@ -146,6 +147,7 @@ public class FeedBackFragment extends BaseFragment {
             }
         }
     }
+
 
 
 }

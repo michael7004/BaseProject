@@ -34,6 +34,9 @@ public class CommonDialogVideoFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         path = getArguments().getString("path");
+
+
+
     }
 
     public static CommonDialogVideoFragment newInstance() {
@@ -104,6 +107,9 @@ public class CommonDialogVideoFragment extends DialogFragment {
 
         return v;
     }
+
+
+
 
 }
 

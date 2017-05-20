@@ -164,7 +164,7 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
         if (MyVideosFragment.isVideos)
             request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "mosaic.mp4");
         else {
-            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id + ".pdf");
+            request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id + ".pdff");
         }
         //Enqueue download and save the referenceId
         downloadReference = downloadManager.enqueue(request);
