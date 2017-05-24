@@ -4,26 +4,27 @@ import android.app.DialogFragment;
 import android.app.DownloadManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ActivityNotFoundException;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
-import com.example.indianic.baseproject.common.CommonDialogFragment;
+import com.example.indianic.baseproject.common.CommonDialogPdfLibFragment;
+import com.example.indianic.baseproject.common.CommonDialogPdfUnlockFragment;
+import com.example.indianic.baseproject.model.MyPdfModel;
 import com.example.indianic.baseproject.utills.Utills;
 
 import java.util.ArrayList;
@@ -36,17 +37,23 @@ import static android.content.Context.DOWNLOAD_SERVICE;
 
 public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.MyViewHolder> {
 
-    private ArrayList<String> horizontalList;
+//    http://mosaicdesigns.in/assets/pdfdownloads/6.pdf
+
+    private ArrayList<MyPdfModel> arrayListMyPdf;
     private Context context;
     private FragmentManager manager;
     private String isUnlock = "Unlock";
     private DownloadManager downloadManager;
     private long Pdf_DownloadId;
+    private long Pdf_DownloadNormal;
+    boolean isComplete = false;
+    private String Global_Postion;
+    private ProgressDialog progressDialog;
 
 
-    public FragmentPdfAdapter(Context context, ArrayList<String> horizontalList, FragmentManager manager) {
+    public FragmentPdfAdapter(Context context, ArrayList<MyPdfModel> arrayListMyPdf, FragmentManager manager) {
         this.context = context;
-        this.horizontalList = horizontalList;
+        this.arrayListMyPdf = arrayListMyPdf;
         this.manager = manager;
         //set filter to only when download is complete and register broadcast receiver
         IntentFilter filter = new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE);
@@ -65,32 +72,19 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
-        if (horizontalList.get(position).equalsIgnoreCase(isUnlock)) {
-            holder.tvTitle.setText(horizontalList.get(position));
+        if (arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0")) {
+
+            holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
+            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_pdf));
+
             holder.ivProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/pdfdownloads/" + arrayListMyPdf.get(position).getDid() + ".pdf");
+                    Global_Postion = arrayListMyPdf.get(position).getDid() + ".pdff";
+                    Pdf_DownloadId = DownloadData(image_uri, arrayListMyPdf.get(position).getDid());
 
 
-                    if (horizontalList.get(position).equalsIgnoreCase(isUnlock)) {
-
-                        Utills.displayDialog(context, "You should unlock first to access this file");
-
-                    } else {
-
-                        try {
-                            Intent intentUrl = new Intent(Intent.ACTION_VIEW);
-                            intentUrl.setDataAndType(Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf"), "application/pdf");
-                            intentUrl.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                            context.startActivity(intentUrl);
-                        } catch (ActivityNotFoundException e) {
-                            Toast.makeText(context, "No PDF Viewer Installed", Toast.LENGTH_LONG).show();
-                        }
-
-//                        final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-//                        final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
-//                        newFragment.show(fragmentTransaction, "");
-                    }
                 }
             });
 
@@ -102,7 +96,7 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
                     PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
                     //inflating menu from xml resource
-                    popup.inflate(R.menu.options_menu_unlock);
+                    popup.inflate(R.menu.options_menu_download);
                     //adding click listener
                     popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
@@ -111,8 +105,49 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                             switch (item.getItemId()) {
                                 case R.id.menu1:
                                     //handle menu1 click
+                                    Uri image_uri_normal = Uri.parse("http://mosaicdesigns.in/assets/pdfdownloads/" + arrayListMyPdf.get(position).getDid() + ".pdf");
+                                    Global_Postion = arrayListMyPdf.get(position).getDid() + ".pdff";
+                                    Pdf_DownloadNormal = DownloadDataNormal(image_uri_normal, arrayListMyPdf.get(position).getDid());
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+
+                }
+            });
+
+        } else {
+            holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
+            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_lock_red));
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Utills.displayDialog(context, "You should unlock this file");
+                }
+            });
+
+
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu_pdf_unlock);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+                                case R.id.menu_pdf_unlock:
+                                    //handle menu1 click
                                     final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                                    final DialogFragment newFragment = CommonDialogFragment.newInstance();
+                                    final DialogFragment newFragment = CommonDialogPdfUnlockFragment.newInstance();
                                     newFragment.show(fragmentTransaction, "");
 
                                     break;
@@ -126,55 +161,6 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                 }
             });
 
-        } else {
-            holder.tvTitle.setText(horizontalList.get(position));
-            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
-                    context.startActivity(browserIntent);
-//                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-//                    final DialogFragment newFragment = CommonDialogPdfViewFragment.newInstance();
-//                    newFragment.show(fragmentTransaction, "");
-
-
-
-                }
-            });
-
-
-            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //creating a popup menu
-
-                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
-                    //inflating menu from xml resource
-                    popup.inflate(R.menu.options_menu);
-                    //adding click listener
-                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                        @Override
-                        public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.menu2:
-
-                                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
-                                    Pdf_DownloadId = DownloadData(image_uri);
-
-                                    Toast.makeText(context, "Download Started", Toast.LENGTH_SHORT).show();
-                                    break;
-
-
-                            }
-                            return false;
-                        }
-                    });
-                    //displaying the popup
-                    popup.show();
-
-                }
-            });
 
         }
 
@@ -184,7 +170,7 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
     @Override
     public int getItemCount() {
-        return horizontalList.size();
+        return arrayListMyPdf.size();
     }
 
 
@@ -198,8 +184,6 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
             tvTitle = (TextView) view.findViewById(R.id.row_fragment_pdf_tv_title);
             ivProfile = (ImageView) view.findViewById(R.id.row_fragment_pdf_iv_logo);
             ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_pdf_iv_more_option);
-
-
         }
 
 
@@ -207,24 +191,31 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
+
         @Override
         public void onReceive(Context context, Intent intent) {
 
             //check if the broadcast message is for our Enqueued download
             long referenceId = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-
             if (referenceId == Pdf_DownloadId) {
-                Toast toast = Toast.makeText(context,
-                        "PDF Download Completed", Toast.LENGTH_LONG);
-                toast.setGravity(Gravity.TOP, 25, 400);
-                toast.show();
+                Utills.dismissProgressDialog(progressDialog);
+                final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                final DialogFragment newFragment = CommonDialogPdfLibFragment.newInstance();
+                Bundle args = new Bundle();
+                args.putString("path", "/sdcard/Android/data/com.example.indianic.baseproject/files/Documents/" + Global_Postion);
+                newFragment.setArguments(args);
+                newFragment.show(fragmentTransaction, "");
+            } else {
+//                Toast toast = Toast.makeText(context,
+//                        "PDF Download Completed", Toast.LENGTH_LONG);
+//                toast.setGravity(Gravity.TOP, 25, 400);
+//                toast.show();
             }
 
         }
     };
 
-    private long DownloadData(Uri uri) {
-
+    private long DownloadData(Uri uri, String id) {
         long downloadReference;
         downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
         DownloadManager.Request request = new DownloadManager.Request(uri);
@@ -233,12 +224,26 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
         //Setting description of request
         request.setDescription("Android Data download using DownloadManager.");
         //Set the local destination for the downloaded file to a path within the application's external files directory
-        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "mosaic.pdf");
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOCUMENTS, id + ".pdff");
+        //Enqueue download and save the referenceId
+        downloadReference = downloadManager.enqueue(request);
+        progressDialog = Utills.showProgressDialog(context, context.getString(R.string.msg_loading), true);
+        return downloadReference;
+    }
+
+    private long DownloadDataNormal(Uri uri, String id) {
+        long downloadReference;
+        downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        //Setting title of request
+        request.setTitle("Data Download");
+        //Setting description of request
+        request.setDescription("Android Data download using DownloadManager.");
+        //Set the local destination for the downloaded file to a path within the application's external files directory
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, id + ".pdff");
         //Enqueue download and save the referenceId
         downloadReference = downloadManager.enqueue(request);
         return downloadReference;
     }
-
-
 }
 

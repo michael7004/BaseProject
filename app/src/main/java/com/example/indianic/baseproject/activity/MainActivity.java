@@ -1,5 +1,7 @@
 package com.example.indianic.baseproject.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -7,14 +9,18 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.fragment.ContactUsFragment;
 import com.example.indianic.baseproject.fragment.FeedBackFragment;
 import com.example.indianic.baseproject.fragment.HomeFragment;
 import com.example.indianic.baseproject.fragment.MyDownloadsFragment;
-import com.example.indianic.baseproject.fragment.MyVideosFragment;
 import com.example.indianic.baseproject.fragment.MyPdfFragment;
+import com.example.indianic.baseproject.fragment.MyVideosFragment;
+import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
 import com.example.indianic.baseproject.utills.Utills;
 
 ;
@@ -25,6 +31,9 @@ import com.example.indianic.baseproject.utills.Utills;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private View view;
+    private TextView tvFullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,18 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+//        view=navigationView.inflateHeaderView(R.layout.nav_header_main);
+//        tvFullName=(TextView) view.findViewById(R.id.nav_header_main_tv_full_name);
+//        tvFullName.setText(strFullName);
+
+
+        View headerLayout = navigationView.getHeaderView(0);
+        tvFullName = (TextView) headerLayout.findViewById(R.id.nav_header_main_tv_full_name);
+        final String strFullName = Preference.getInstance().mSharedPreferences.getString(Constants.PRE_FULL_NAME, "");
+        if (!strFullName.equalsIgnoreCase("")) {
+            tvFullName.setText(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_FULL_NAME, ""));
+        }
+
 
     }
 
@@ -57,10 +78,46 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
         }
+        if (getFragmentManager().getBackStackEntryCount() > 0) {
+            Utills.hideSoftKeyboard(this);
+            getFragmentManager().popBackStack();
+        } else {
+            buildAlertMessageExit();
+        }
+
+
+
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        if (drawer.isDrawerOpen(GravityCompat.START)) {
+//            drawer.closeDrawer(GravityCompat.START);
+//        } else {
+//            super.onBackPressed();
+//        }
     }
+
+
+    private void buildAlertMessageExit() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.TAG_EXIT_WARN_MSG)).setCancelable(false).setPositiveButton(getString(R.string.TAG_YES), new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, final int id) {
+                callToFinish();
+            }
+        }).setNegativeButton(getString(R.string.TAG_NO), new DialogInterface.OnClickListener() {
+            public void onClick(final DialogInterface dialog, final int id) {
+                dialog.cancel();
+            }
+        });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void callToFinish() {
+        super.finish();
+    }
+
+
+
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

@@ -35,8 +35,6 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
     private ConstraintLayout svParent;
     private AsyncForgotPassword asyncForgotPassword;
     private String success = "Success";
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,21 +69,14 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
                     final String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                     if (Utills.checkForPermission(ForgotPasswordActivity.this, WRITE_STORAGE_PERMISSION)) {
                         login(etEmail.getText().toString());
-
-
-//                        startActivity(new Intent(this, MainActivity.class));
-//                        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
-//                        finish();
                     } else {
                         ActivityCompat.requestPermissions(ForgotPasswordActivity.this, new String[]{WRITE_STORAGE_PERMISSION}, PERMISSION_REQUEST_WRITE_STORAGE_CODE);
                     }
                 }
-
                 break;
         }
 
     }
-
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -119,19 +110,21 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
             showSnackbarNonSticky(svParent, getString(R.string.err_msg_enter_client_id), true, ForgotPasswordActivity.this);
             etEmail.requestFocus();
             return false;
+        } else if (!Utills.isValidEmail(etEmail.getText().toString())) {
+            showSnackbarNonSticky(svParent, getString(R.string.err_msg_enter_valid_email_msg), true,this);
+            etEmail.requestFocus();
+            return false;
         } else {
             return true;
         }
     }
 
     /**
-     * API call for resend pin
+     * API call for forgot password
      *
      * @param clientID
      */
     private void login(String clientID) {
-//        clientID = Utills.encrypt(clientID);
-//        password = Utills.encrypt(password);
         if (Utills.isNetworkAvailable(ForgotPasswordActivity.this) && !TextUtils.isEmpty(clientID)) {
             if (asyncForgotPassword != null && asyncForgotPassword.getStatus() == AsyncTask.Status.PENDING) {
                 asyncForgotPassword.execute(clientID);

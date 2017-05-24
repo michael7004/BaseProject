@@ -20,6 +20,15 @@ public class WSLogin {
     private String regid = "";
     private String email = "";
     private String fullname = "";
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
     private String examid = "";
     private String regstatus = "";
     private String actflag = "";

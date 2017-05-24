@@ -39,8 +39,6 @@ public class HomeFragment extends BaseFragment {
     private ViewPagerAdapter mAdapter;
     private AsynProductList asynProductList;
     private AsynPromotionList asynPromotionList;
-
-
     public static String pdfUrl = "http://mosaicdesigns.in/webservice/app_product_slider";
     public static String BannerUrl = "http://mosaicdesigns.in/webservice/app_banner_silder";
 
@@ -75,6 +73,19 @@ public class HomeFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
         super.onClick(v);
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (asynProductList != null && asynProductList.getStatus() == AsyncTask.Status.RUNNING) {
+            asynProductList.cancel(true);
+        }
+        if (asynPromotionList != null && asynPromotionList.getStatus() == AsyncTask.Status.RUNNING) {
+            asynPromotionList.cancel(true);
+        }
+
     }
 
     @Override

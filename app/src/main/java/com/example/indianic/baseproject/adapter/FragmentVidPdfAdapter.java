@@ -4,6 +4,7 @@ import android.app.DialogFragment;
 import android.app.DownloadManager;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -24,9 +25,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
+import com.example.indianic.baseproject.common.CommonDialogPdfLibFragment;
 import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
 import com.example.indianic.baseproject.fragment.MyVideosFragment;
 import com.example.indianic.baseproject.model.VidPdfListModel;
+import com.example.indianic.baseproject.utills.Utills;
 
 import java.util.ArrayList;
 
@@ -47,6 +50,9 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
     private String isUnlock = "Unlock";
     private DownloadManager downloadManager;
     private long Image_DownloadId, Music_DownloadId;
+    private long Pdf_DownloadId;
+    private ProgressDialog progressDialog;
+    private String Global_Postion;
 
 
     public FragmentVidPdfAdapter(Context context, ArrayList<VidPdfListModel> vidPdfListModels, FragmentManager manager) {
@@ -88,9 +94,13 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
                     newFragment.show(fragmentTransaction, "");
                 } else {
 
-                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf";
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
-                    context.startActivity(browserIntent);
+//                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf";
+//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
+//                    context.startActivity(browserIntent);
+
+                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf");
+                    Global_Postion = vidPdfListModels.get(position).getVdid() + ".pdff";
+                    Pdf_DownloadId = DownloadDatanPatch(image_uri, vidPdfListModels.get(position).getVdid());
 
 
                 }
@@ -171,6 +181,22 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
         return downloadReference;
     }
 
+    private long DownloadDatanPatch(Uri uri, String id) {
+        long downloadReference;
+        downloadManager = (DownloadManager) context.getSystemService(DOWNLOAD_SERVICE);
+        DownloadManager.Request request = new DownloadManager.Request(uri);
+        //Setting title of request
+        request.setTitle("Data Download");
+        //Setting description of request
+        request.setDescription("Android Data download using DownloadManager.");
+        //Set the local destination for the downloaded file to a path within the application's external files directory
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOCUMENTS, id + ".pdff");
+        //Enqueue download and save the referenceId
+        downloadReference = downloadManager.enqueue(request);
+        progressDialog = Utills.showProgressDialog(context, context.getString(R.string.msg_loading), true);
+        return downloadReference;
+    }
+
 
     private BroadcastReceiver downloadReceiver = new BroadcastReceiver() {
 
@@ -188,6 +214,14 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
                 Toast toast = Toast.makeText(context, "Video Download Complete", Toast.LENGTH_LONG);
                 toast.setGravity(Gravity.TOP, 25, 400);
                 toast.show();
+            } else if (referenceId == Pdf_DownloadId) {
+                Utills.dismissProgressDialog(progressDialog);
+                final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                final DialogFragment newFragment = CommonDialogPdfLibFragment.newInstance();
+                Bundle args = new Bundle();
+                args.putString("path", "/sdcard/Android/data/com.example.indianic.baseproject/files/Documents/" + Global_Postion);
+                newFragment.setArguments(args);
+                newFragment.show(fragmentTransaction, "");
             }
 
         }

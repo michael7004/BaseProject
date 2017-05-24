@@ -35,7 +35,7 @@ public class MyDownloadsFragment extends BaseFragment {
     public static boolean isPdfs = false;
     public static boolean isVideos = true;
     private RecyclerView recyclerViewOffLine;
-    private ArrayList<String> arrayList;
+
     private FragmentOffLineVideoAdapter fragmentOffLineVideoAdapter;
     private FragmentOffLinePdfAdapter fragmentOffLinePdfAdapter;
     private FragmentManager manager;
@@ -94,7 +94,7 @@ public class MyDownloadsFragment extends BaseFragment {
                 for (int i = 0; i < list.length; i++)
 
                     if (list[i].getName().endsWith(pdfPattern)) {
-                        Log.d("PDF",list[i].getAbsolutePath());
+                        Log.d("PDF", list[i].getAbsolutePath());
                         OffLinePdfModel offLinePdfModel = new OffLinePdfModel();
                         offLinePdfModel.setId(list[i].getPath());
                         offLinePdfModel.setTitle(list[i].getName());
@@ -113,6 +113,7 @@ public class MyDownloadsFragment extends BaseFragment {
 
     private ArrayList<OffLineVideoModel> search_Video() {
         try {
+
             File mfile = new File("/storage/emulated/0/Android/data/com.example.indianic.baseproject/files/Download/");
             File[] list = mfile.listFiles();
             if (list.length == 0)
@@ -125,7 +126,7 @@ public class MyDownloadsFragment extends BaseFragment {
                 for (int i = 0; i < list.length; i++)
                     if (list[i].getName().endsWith(VideoPattern)) {
 
-                        Log.d("Video",list[i].getAbsolutePath());
+                        Log.d("Video", list[i].getAbsolutePath());
                         OffLineVideoModel offLineVideoModel = new OffLineVideoModel();
                         offLineVideoModel.setId(list[i].getPath());
                         offLineVideoModel.setTitle(list[i].getName());
@@ -160,7 +161,7 @@ public class MyDownloadsFragment extends BaseFragment {
         switch (v.getId()) {
             case R.id.fragment_my_downloads_tv_videos:
                 tvVideos.setVisibility(View.VISIBLE);
-                tvVideos.setBackgroundResource(R.color.color_all_category_select_bg);
+                tvVideos.setBackgroundResource(R.color.colorAccent);
                 tvPdfs.setBackgroundResource(android.R.color.transparent);
                 tvVideos.setTextColor(getResources().getColor(R.color.colorWhite));
                 tvPdfs.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));
@@ -173,7 +174,7 @@ public class MyDownloadsFragment extends BaseFragment {
 
                 Utills.hideSoftKeyboard(getActivity());
                 tvVideos.setBackgroundResource(android.R.color.transparent);
-                tvPdfs.setBackgroundResource(R.color.color_all_category_select_bg);
+                tvPdfs.setBackgroundResource(R.color.colorAccent);
                 tvVideos.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));
                 tvPdfs.setTextColor(getResources().getColor(R.color.colorWhite));
                 isPdfs = true;
@@ -184,11 +185,25 @@ public class MyDownloadsFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
+
+        if (asyncVideoList != null && asyncVideoList.getStatus() == AsyncTask.Status.RUNNING) {
+            asyncVideoList.cancel(true);
+        }
+        if (asyncPdfList != null && asyncPdfList.getStatus() == AsyncTask.Status.RUNNING) {
+            asyncPdfList.cancel(true);
+        }
+
+    }
+
 
     private void setFirstTab() {
         Utills.hideSoftKeyboard(getActivity());
         tvVideos.setVisibility(View.VISIBLE);
-        tvVideos.setBackgroundResource(R.color.color_all_category_select_bg);
+        tvVideos.setBackgroundResource(R.color.colorAccent);
         tvPdfs.setBackgroundResource(android.R.color.transparent);
         tvVideos.setTextColor(getResources().getColor(R.color.colorWhite));
         tvPdfs.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));
@@ -244,10 +259,11 @@ public class MyDownloadsFragment extends BaseFragment {
                 tvNoData.setVisibility(View.VISIBLE);
                 Utills.dismissProgressDialogNew(progressDialog);
             } else {
+                tvNoData.setVisibility(View.INVISIBLE);
                 Utills.dismissProgressDialogNew(progressDialog);
             }
             Log.d("SIZE", String.valueOf(result.size()));
-            fragmentOffLineVideoAdapter = new FragmentOffLineVideoAdapter(getActivity(), result, manager,new MyDownloadsFragment());
+            fragmentOffLineVideoAdapter = new FragmentOffLineVideoAdapter(getActivity(), result, manager, new MyDownloadsFragment());
             recyclerViewOffLine.setLayoutManager(new GridLayoutManager(getActivity(), 3));
             recyclerViewOffLine.setAdapter(fragmentOffLineVideoAdapter);
             setFirstTab();
@@ -280,6 +296,7 @@ public class MyDownloadsFragment extends BaseFragment {
                 tvNoData.setVisibility(View.VISIBLE);
                 Utills.dismissProgressDialogNew(progressDialog);
             } else {
+                tvNoData.setVisibility(View.INVISIBLE);
                 Utills.dismissProgressDialogNew(progressDialog);
             }
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+
 /**
  * Created by umesh nepali on 21/04/17.
  * 1.What is scenario where we need to make base activity.
@@ -39,9 +40,40 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
     }
 
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//
+//        if (getFragmentManager().getBackStackEntryCount() > 0) {
+//            Utills.hideSoftKeyboard(this);
+//            getFragmentManager().popBackStack();
+//        } else {
+//            buildAlertMessageExit();
+//        }
+//    }
+//
+//    /**
+//     * asks user for the confirmation before exiting of the app
+//     */
+//    private void buildAlertMessageExit() {
+//        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setMessage(getString(R.string.TAG_EXIT_WARN_MSG)).setCancelable(false).setPositiveButton(getString(R.string.TAG_YES), new DialogInterface.OnClickListener() {
+//            public void onClick(final DialogInterface dialog, final int id) {
+//                callToFinish();
+//            }
+//        }).setNegativeButton(getString(R.string.TAG_NO), new DialogInterface.OnClickListener() {
+//            public void onClick(final DialogInterface dialog, final int id) {
+//                dialog.cancel();
+//            }
+//        });
+//        final AlertDialog alert = builder.create();
+//        alert.show();
+//    }
+//
+//    private void callToFinish() {
+//        super.finish();
+//    }
 
 }

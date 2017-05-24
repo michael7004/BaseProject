@@ -7,9 +7,13 @@ class WSConstants {
     //    final static String BASE_URL = "https://imageplus.planningplus.com.au/?request=";
     final static long CONNECTION_TIMEOUT = 240;
     final static String METHOD_STUDENT_LOGIN = "studentLogin";
+    final static String METHOD_UPDATE_EXAM_ID = "update_examid";
+
+
     final static String METHOD_STUDENT_FEEDBACKS = "feedbacks";
     final static String METHOD_VIDEO_LIST = "select_vcVideos";
     final static String METHOD_PDF_LIST = "select_vcPdfs";
+    final static String METHOD_MY_PDF_LIST = "select_smPdfs";
 
 
     final static String METHOD_FORGOT_PASSWORD = "forgotpwd";

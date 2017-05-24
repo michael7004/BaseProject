@@ -11,4 +11,5 @@ public class Constants {
     public static final String IV = "9AA5DCBFC478541DD11C5523E04A3AF8";
     public final static String PRE_IS_LOGIN = "is_login";
     public static final String PRE_USER_ID ="user_id" ;
+    public static final String PRE_FULL_NAME ="full_name" ;
 }

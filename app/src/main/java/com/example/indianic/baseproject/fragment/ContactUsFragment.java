@@ -23,10 +23,7 @@ public class ContactUsFragment extends BaseFragment {
     private TextView tvSpannableHelpLineVal;
     private TextView tvSpannableEmail;
     private TextView tvSpannableWebSite;
-
     private TextView tvContactNo;
-
-
     private View view;
     private Context context;
     String htmlString="<u>HEAD CENTER</u>";
@@ -35,9 +32,6 @@ public class ContactUsFragment extends BaseFragment {
     String htmlHelpLinValeString="<u>1) 9033082625</u>";
     String htmlEmailString="<u>EMAIL</u>";
     String htmlWebSiteString="<u>WEBSITE</u>";
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -70,4 +64,6 @@ public class ContactUsFragment extends BaseFragment {
     public void trackScreen() {
 
     }
+
+
 }

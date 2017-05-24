@@ -25,7 +25,7 @@
                 android:id="@+id/row_fragment_video_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+              android:src="@drawable/ic_play_arrow_red_700_24dp"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -53,11 +53,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:src="@drawable/ic_more_vert_black_24dp" />
-
-
             </LinearLayout>
-
-
         </RelativeLayout>
 
 

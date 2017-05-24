@@ -26,7 +26,7 @@
                 android:id="@+id/row_fragment_off_line_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_pdf_icon"
+              android:src="@drawable/ic_pdf"
                 android:scaleType="centerCrop" />
 
             <com.example.indianic.baseproject.common.CustomTextview
@@ -37,7 +37,6 @@
                 android:layout_marginTop="@dimen/_3sdp"
                 android:ellipsize="end"
                 android:maxLines="1"
-
                 android:textColor="@color/colorBlack"
                 card_view:font_name="@string/font_open_sans_bold" />
 
@@ -47,10 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-
-
                 android:layout_below="@+id/row_fragment_off_line_pdf_iv_logo"
-
                 android:src="@drawable/ic_more_vert_black_24dp" />
 
 

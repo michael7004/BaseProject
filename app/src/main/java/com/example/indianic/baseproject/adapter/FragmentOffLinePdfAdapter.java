@@ -62,25 +62,14 @@ public class FragmentOffLinePdfAdapter extends RecyclerView.Adapter<FragmentOffL
                     final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
                     newFragment.show(fragmentTransaction, "");
                 } else {
+
                     File file = new File(offLinePdfModels.get(position).getPath());
-
-
                     final FragmentTransaction fragmentTransaction = manager.beginTransaction();
                     final DialogFragment newFragment = CommonDialogPdfLibFragment.newInstance();
                     Bundle args = new Bundle();
                     args.putString("path", offLinePdfModels.get(position).getPath());
                     newFragment.setArguments(args);
                     newFragment.show(fragmentTransaction, "");
-
-//                    Uri path = Uri.fromFile(file);
-//                    Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
-//                    pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                    pdfOpenintent.setDataAndType(path, "application/pdf");
-//                    try {
-//                        context.startActivity(pdfOpenintent);
-//                    } catch (ActivityNotFoundException e) {
-//
-//                    }
                 }
             }
         });

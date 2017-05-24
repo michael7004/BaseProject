@@ -20,6 +20,8 @@ import com.example.indianic.baseproject.adapter.FragmentVidPdfAdapter;
 import com.example.indianic.baseproject.adapter.FragmentVideosAdapter;
 import com.example.indianic.baseproject.model.VidPdfListModel;
 import com.example.indianic.baseproject.model.VideosListModel;
+import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
 import com.example.indianic.baseproject.utills.Utills;
 import com.example.indianic.baseproject.webservice.WSVidPdfList;
 import com.example.indianic.baseproject.webservice.WSVideosList;
@@ -79,7 +81,7 @@ public class MyVideosFragment extends BaseFragment implements View.OnClickListen
 
         tvVideos.setOnClickListener(this);
         tvPdfs.setOnClickListener(this);
-        getVideosList("717");
+        getVideosList(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
 
 
     }
@@ -101,36 +103,44 @@ public class MyVideosFragment extends BaseFragment implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.fragment_videos_tv_videos:
-
                 tvVideos.setVisibility(View.VISIBLE);
-                tvVideos.setBackgroundResource(R.color.color_all_category_select_bg);
+                tvVideos.setBackgroundResource(R.color.colorAccent);
                 tvPdfs.setBackgroundResource(android.R.color.transparent);
                 tvVideos.setTextColor(getResources().getColor(R.color.colorWhite));
                 tvPdfs.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));
                 isPdfs = false;
-                getVideosList("717");
+                getVideosList(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
                 break;
 
             case R.id.fragment_videos_tv_pdfs:
                 Utills.hideSoftKeyboard(getActivity());
                 tvVideos.setBackgroundResource(android.R.color.transparent);
-                tvPdfs.setBackgroundResource(R.color.color_all_category_select_bg);
+                tvPdfs.setBackgroundResource(R.color.colorAccent);
                 tvVideos.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));
                 tvPdfs.setTextColor(getResources().getColor(R.color.colorWhite));
                 isPdfs = true;
                 isVideos = false;
-
-                getVidPdfList("717");
+                getVidPdfList(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
                 break;
         }
     }
 
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (asynVideoList != null && asynVideoList.getStatus() == AsyncTask.Status.RUNNING) {
+            asynVideoList.cancel(true);
+        }
+        if (asynVidPdfList != null && asynVidPdfList.getStatus() == AsyncTask.Status.RUNNING) {
+            asynVidPdfList.cancel(true);
+        }
+    }
 
     private void setFirstTab() {
         Utills.hideSoftKeyboard(getActivity());
         tvVideos.setVisibility(View.VISIBLE);
-        tvVideos.setBackgroundResource(R.color.color_all_category_select_bg);
+        tvVideos.setBackgroundResource(R.color.colorAccent);
         tvPdfs.setBackgroundResource(android.R.color.transparent);
         tvVideos.setTextColor(getResources().getColor(R.color.colorWhite));
         tvPdfs.setTextColor(getResources().getColor(R.color.color_all_category_none_select_text));

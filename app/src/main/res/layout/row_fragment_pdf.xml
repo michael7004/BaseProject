@@ -23,35 +23,41 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+
             <com.example.indianic.baseproject.common.SquareImageView
                 android:id="@+id/row_fragment_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/ic_pdf"
                 android:scaleType="centerCrop" />
 
+            <LinearLayout
 
-            <com.example.indianic.baseproject.common.CustomTextview
-                android:id="@+id/row_fragment_pdf_tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
                 android:layout_below="@+id/row_fragment_pdf_iv_logo"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Basic Tutorial"
-                android:textColor="@color/colorBlack"
-                card_view:font_name="@string/font_open_sans_bold" />
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/row_fragment_pdf_iv_more_option"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
+                <com.example.indianic.baseproject.common.CustomTextview
+                    android:id="@+id/row_fragment_pdf_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="Basic Tutorial"
+                    android:textColor="@color/colorBlack"
+                    card_view:font_name="@string/font_open_sans_bold" />
 
-                android:layout_below="@+id/row_fragment_pdf_iv_logo"
-                android:src="@drawable/ic_more_vert_black_24dp" />
+                <ImageView
+                    android:id="@+id/row_fragment_pdf_iv_more_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_more_vert_black_24dp" />
+            </LinearLayout>
 
 
         </RelativeLayout>

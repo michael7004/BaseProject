@@ -25,7 +25,7 @@
                 android:id="@+id/row_fragment_vid_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/ic_pdf"
                 android:scaleType="centerCrop" />
 
             <LinearLayout

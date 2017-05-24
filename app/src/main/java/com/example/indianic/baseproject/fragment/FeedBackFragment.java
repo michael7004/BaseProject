@@ -76,6 +76,15 @@ public class FeedBackFragment extends BaseFragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (AsyncFeedback != null && AsyncFeedback.getStatus() == AsyncTask.Status.RUNNING) {
+            AsyncFeedback.cancel(true);
+        }
+
+    }
+
     /**
      * Validate user input for further process
      *

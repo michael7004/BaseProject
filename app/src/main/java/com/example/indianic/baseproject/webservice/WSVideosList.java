@@ -31,6 +31,7 @@ public class WSVideosList {
     private String createdon;
     private String createdby;
     private String delflag;
+
     private ArrayList<VideosListModel> videosListModels=new ArrayList<>();
 
 

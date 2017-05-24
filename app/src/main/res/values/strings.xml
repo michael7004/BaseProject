@@ -26,7 +26,7 @@
     <string name="activity_registration_submit">Submit</string>
     <string name="msg_network_error">Network error. Please try again after some time</string>
     <string name="msg_loading">Loading…</string>
-    <string name="err_msg_enter_client_id">Please enter client id</string>
+    <string name="err_msg_enter_client_id">Please enter email id</string>
     <string name="err_msg_enter_password">Please enter password</string>
     <string name="msg_no_internet">No internet. Please try after some time</string>
     <string name="err_msg_permission_write_phone">Permission to access write storage is required in order to continue</string>
@@ -36,5 +36,10 @@
     <string name="please_wait">Please wait...</string>
     <string name="pick_file">Pick file</string>
     <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
+    <string name="no_data_found">No data found</string>
+    <string name="TAG_EXIT_WARN_MSG">Are you sure you want to exit ?</string>
+    <string name="TAG_YES">YES</string>
+    <string name="TAG_NO">NO</string>
+    <string name="err_msg_enter_valid_email_msg">Enter valid email id</string>
 
 </resources>

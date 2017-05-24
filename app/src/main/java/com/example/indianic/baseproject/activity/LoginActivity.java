@@ -84,7 +84,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     if (Utills.checkForPermission(LoginActivity.this, WRITE_STORAGE_PERMISSION)) {
                         login(etEmail.getText().toString(), etPassWord.getText().toString());
 
-
 //                        startActivity(new Intent(this, MainActivity.class));
 //                        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
 //                        finish();
@@ -128,7 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     }
 
     /**
-     * API call for resend pin
+     * API call for Login
      *
      * @param clientID
      */
@@ -156,6 +155,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private boolean validation() {
         if (TextUtils.isEmpty(etEmail.getText().toString())) {
             showSnackbarNonSticky(svParent, getString(R.string.err_msg_enter_client_id), true, LoginActivity.this);
+            etEmail.requestFocus();
+            return false;
+        } else if (!Utills.isValidEmail(etEmail.getText().toString())) {
+            showSnackbarNonSticky(svParent, getString(R.string.err_msg_enter_valid_email_msg), true, LoginActivity.this);
             etEmail.requestFocus();
             return false;
         } else if (TextUtils.isEmpty(etPassWord.getText().toString())) {
@@ -197,6 +200,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
                 Preference.getInstance().savePreferenceData(Constants.PRE_IS_LOGIN, true);
                 Preference.getInstance().savePreferenceData(Constants.PRE_USER_ID, wsLogin.getRegid());
+                Preference.getInstance().savePreferenceData(Constants.PRE_FULL_NAME, wsLogin.getFullname());
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 finish();

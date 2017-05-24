@@ -3,9 +3,21 @@
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_my_pdf_rl_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/fragment_my_pdf_tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:text="@string/no_data_found"
+        android:visibility="invisible"
+
+        />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/fragment_pdf_rv_main"
