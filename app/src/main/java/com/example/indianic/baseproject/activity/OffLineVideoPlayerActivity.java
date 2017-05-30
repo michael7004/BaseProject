@@ -1,0 +1,77 @@
+package com.example.indianic.baseproject.activity;
+
+import android.app.ProgressDialog;
+import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.MediaController;
+import android.widget.VideoView;
+
+import com.example.indianic.baseproject.R;
+import com.example.indianic.baseproject.utills.Utills;
+
+/**
+ * OffLineVideoPlayerActivity class created on 30/05/17.
+ */
+
+public class OffLineVideoPlayerActivity extends BaseActivity {
+
+    private VideoView myVideoView;
+    private int position = 0;
+    private MediaController mediaControls;
+    private ProgressDialog progressDialog;
+
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        setContentView(R.layout.activity_off_line_video_player);
+        String vidPath= getIntent().getStringExtra("VID_PATH_OFF_LINE");
+        //set the media controller buttons
+        if (mediaControls == null) {
+            mediaControls = new MediaController(OffLineVideoPlayerActivity.this);
+        }
+
+        //initialize the VideoView
+        myVideoView = (VideoView) findViewById(R.id.activity_off_line_video_player_vv_container);
+        progressDialog = Utills.showProgressDialogNew(OffLineVideoPlayerActivity.this, getString(R.string.msg_loading), false);
+        try {
+            //set the media controller in the VideoView
+            myVideoView.setMediaController(mediaControls);
+
+            //set the uri of the video to be played
+            myVideoView.setVideoURI(Uri.parse(vidPath));
+
+        } catch (Exception e) {
+            Log.e("Error", e.getMessage());
+            e.printStackTrace();
+        }
+
+        myVideoView.requestFocus();
+        //we also set an setOnPreparedListener in order to know when the video file is ready for playback
+        myVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                // close the progress bar and play the video
+                Utills.dismissProgressDialogNew(progressDialog);
+                //if we have a position on savedInstanceState, the video playback should start from here
+                myVideoView.seekTo(position);
+                if (position == 0) {
+                    myVideoView.start();
+                } else {
+                    //if we come from a resumed activity, video playback will be paused
+                    myVideoView.pause();
+
+                }
+            }
+        });
+    }
+
+    @Override
+    public void initView() {
+
+    }
+}

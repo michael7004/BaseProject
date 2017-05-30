@@ -3,12 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/_10sdp"
-    android:layout_marginTop="@dimen/_30sdp"
     android:background="@color/colorWhite"
     android:gravity="center"
-    android:id="@+id/dialog_custom_pdf_unlock_rl_container"
-    android:padding="@dimen/_5sdp">
+    android:id="@+id/dialog_custom_pdf_unlock_rl_container">
 
 
     <android.support.design.widget.TextInputLayout

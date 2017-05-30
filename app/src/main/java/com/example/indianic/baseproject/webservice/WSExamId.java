@@ -3,6 +3,9 @@ package com.example.indianic.baseproject.webservice;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.indianic.baseproject.utills.Constants;
+import com.example.indianic.baseproject.utills.Preference;
+
 import org.json.JSONObject;
 
 import okhttp3.FormBody;
@@ -53,7 +56,8 @@ public class WSExamId {
     private RequestBody generateRegisterRequest(final String ID) {
         final WSConstants wsConstants = new WSConstants();
         final FormBody.Builder formEncodingBuilder = new FormBody.Builder();
-        formEncodingBuilder.add(wsConstants.PARAMS_ID, ID);
+        formEncodingBuilder.add(wsConstants.PARAMS_ID, Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
+        formEncodingBuilder.add(wsConstants.PARAMS_EXAM_MSG_ID,ID);
 
         return formEncodingBuilder.build();
     }

@@ -68,7 +68,7 @@ public class ForgotPasswordActivity extends BaseActivity implements View.OnClick
                 if (validation()) {
                     final String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                     if (Utills.checkForPermission(ForgotPasswordActivity.this, WRITE_STORAGE_PERMISSION)) {
-                        login(etEmail.getText().toString());
+                        login(etEmail.getText().toString().trim());
                     } else {
                         ActivityCompat.requestPermissions(ForgotPasswordActivity.this, new String[]{WRITE_STORAGE_PERMISSION}, PERMISSION_REQUEST_WRITE_STORAGE_CODE);
                     }

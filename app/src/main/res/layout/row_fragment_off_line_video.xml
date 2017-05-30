@@ -27,27 +27,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_play_arrow_red_700_24dp" />
+                android:src="@drawable/ic_video_play" />
 
-            <com.example.indianic.baseproject.common.CustomTextview
-                android:id="@+id/row_fragment_off_line_tv_title"
+            <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/row_fragment_off_line_iv_logo"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:text="Basic Tutorial"
-                android:textColor="@color/colorWhite"
-                card_view:font_name="@string/font_open_sans_bold" />
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-            <ImageView
-                android:id="@+id/row_fragment_off_line_iv_more_option"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_below="@+id/row_fragment_off_line_iv_logo"
-                android:src="@drawable/ic_more_vert_black_24dp" />
+                <com.example.indianic.baseproject.common.CustomTextview
+                    android:id="@+id/row_fragment_off_line_tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="Basic Tutorial fsfsfsfsfsf fsfsfsfsfsfsffsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf"
+                    android:textColor="@color/colorBlack"
+                    card_view:font_name="@string/font_open_sans_bold" />
+
+                <ImageView
+                    android:id="@+id/row_fragment_off_line_iv_more_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_more_vert_black_24dp" />
+            </LinearLayout>
 
 
         </RelativeLayout>

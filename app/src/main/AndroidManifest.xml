@@ -11,18 +11,18 @@
     <application
         android:name=".BaseProjectApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:configChanges="locale|orientation|keyboardHidden|screenSize"
+        android:icon="@drawable/ic_brand_icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
-
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:windowSoftInputMode="stateHidden|adjustResize">
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,21 +31,22 @@
         <!-- Main activity -->
         <activity
             android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            />
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+             />
 
         <activity
             android:name=".activity.ForgotPasswordActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait" />
-
-
-
-
+            />
+        <activity
+            android:name=".activity.OnLineVideoPlayerActivity"
+            android:configChanges="locale|orientation|keyboardHidden|screenSize"
+            />
+        <activity
+            android:name=".activity.OffLineVideoPlayerActivity"
+            android:configChanges="locale|orientation|keyboardHidden|screenSize"
+             />
     </application>
 
 </manifest>

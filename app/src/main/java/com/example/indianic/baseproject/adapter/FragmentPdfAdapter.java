@@ -75,7 +75,7 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
         if (arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0")) {
 
             holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
-            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_pdf));
+            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_unlock_pdf));
 
             holder.ivProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -121,11 +121,16 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
         } else {
             holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
-            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_lock_red));
+            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_lock_pdf));
             holder.ivProfile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Utills.displayDialog(context, "You should unlock this file");
+                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+                    final DialogFragment newFragment = CommonDialogPdfUnlockFragment.newInstance();
+                    newFragment.show(fragmentTransaction, "");
+
+
+//                    Utills.displayDialog(context, "You should unlock this file");
                 }
             });
 

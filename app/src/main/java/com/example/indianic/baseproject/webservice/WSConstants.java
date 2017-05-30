@@ -33,6 +33,8 @@ class WSConstants {
     final String PARAMS_CLIENT_HASH = "client_hash";
     final String PARAMS_ID = "regid";
     final String PARAMS_FEED_BACK = "feedback";
+    final String PARAMS_EXAM_MSG_ID = "examid";
+
 
     final String PARAMS_A_HSIS = "a_hsid";
     final String PARAMS_A_HSALT= "a_hsalt";

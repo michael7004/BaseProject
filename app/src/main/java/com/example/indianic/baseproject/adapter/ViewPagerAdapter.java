@@ -1,6 +1,8 @@
 package com.example.indianic.baseproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
  * ViewPagerAdapter class created on 11/05/17.
  */
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class ViewPagerAdapter extends PagerAdapter  {
 
     private Context mContext;
     private int[] mResources;
@@ -44,10 +46,24 @@ public class ViewPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.pager_item, container, false);
 
+
+
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img_pager_item);
+
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String url =promotionalSliderModels.get(position).getA_pshref() ;
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                mContext.startActivity(i);
+            }
+        });
 
         Glide.with(mContext)
                 .load("http://mosaicdesigns.in/assets/promotional-banners/"+promotionalSliderModels.get(position).getA_psid()+".png")

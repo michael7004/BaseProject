@@ -3,8 +3,6 @@ package com.example.indianic.baseproject.common;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -45,16 +43,17 @@ public class CommonDialogPdfUnlockFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(final Bundle savedInstanceState) {
 
-        // the content
-        final RelativeLayout root = new RelativeLayout(getActivity());
-        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+//        // the content
+//        final RelativeLayout root = new RelativeLayout(getActivity());
+//        root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         // creating the fullscreen dialog
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(root);
-        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.YELLOW));
-        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        dialog.setContentView(root);
+
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+//        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return dialog;
     }
 
@@ -93,7 +92,7 @@ public class CommonDialogPdfUnlockFragment extends DialogFragment {
                 asyncLogin.execute(id);
             } else if (asyncLogin == null || asyncLogin.getStatus() == AsyncTask.Status.FINISHED) {
                 asyncLogin = new AsyncCheckExamID();
-                asyncLogin.execute(id);
+                asyncLogin.execute(id,etExamId.getText().toString().trim());
             }
         } else {
             Utills.showSnackbarNonSticky(relativeLayout, getString(R.string.msg_no_internet), true, getActivity());

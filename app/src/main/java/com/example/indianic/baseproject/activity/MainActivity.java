@@ -50,19 +50,33 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+
+        final ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_close, R.string.navigation_drawer_open) {
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+
+                Utills.hideSoftKeyboard(MainActivity.this);
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
+        };
+
+        drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+        drawer.addDrawerListener(actionBarDrawerToggle);
+
+
+        actionBarDrawerToggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-//        view=navigationView.inflateHeaderView(R.layout.nav_header_main);
-//        tvFullName=(TextView) view.findViewById(R.id.nav_header_main_tv_full_name);
-//        tvFullName.setText(strFullName);
-
-
         View headerLayout = navigationView.getHeaderView(0);
         tvFullName = (TextView) headerLayout.findViewById(R.id.nav_header_main_tv_full_name);
         final String strFullName = Preference.getInstance().mSharedPreferences.getString(Constants.PRE_FULL_NAME, "");
@@ -85,7 +99,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         } else {
             buildAlertMessageExit();
         }
-
 
 
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -115,8 +128,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void callToFinish() {
         super.finish();
     }
-
-
 
 
 //    @Override

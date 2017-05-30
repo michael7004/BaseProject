@@ -5,7 +5,14 @@
     android:layout_height="150dp"
     android:background="@color/colorPrimary"
     android:gravity="center"
-    android:padding="@dimen/_10sdp">
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo_new"
+       />
 
     <com.example.indianic.baseproject.common.CustomTextview
         android:id="@+id/nav_header_main_tv_full_name"

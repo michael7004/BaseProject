@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BaseProject</string>
+    <string name="app_name">Mosaic</string>
 
     <!--Custom fonts names here-->
     <string name="font_open_sans">OpenSans_Light.ttf</string>

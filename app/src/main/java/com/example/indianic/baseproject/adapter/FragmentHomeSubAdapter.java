@@ -1,6 +1,8 @@
 package com.example.indianic.baseproject.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,16 +36,26 @@ public class FragmentHomeSubAdapter extends RecyclerView.Adapter<FragmentHomeSub
     }
 
     @Override
-    public void onBindViewHolder(FragmentHomeSubAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(FragmentHomeSubAdapter.ViewHolder viewHolder, final int i) {
 
 //        viewHolder.tv_android.setText(ProductSliderModel.get(i).getA_psid());
 
+        viewHolder.img_android.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String url = productSliderModel.get(i).getA_pshref();
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                context.startActivity(i);
+            }
+        });
 
         Glide.with(context)
-                .load("http://mosaicdesigns.in/assets/promotional-products/"+productSliderModel.get(i).getA_psid()+".png")
+                .load("http://mosaicdesigns.in/assets/promotional-products/" + productSliderModel.get(i).getA_psid() + ".png")
 
-//                .placeholder(R.drawable.loading_spinner)
-                .crossFade()
+//             .placeholder(R.drawable.loading_spinner)
+
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(viewHolder.img_android);
 

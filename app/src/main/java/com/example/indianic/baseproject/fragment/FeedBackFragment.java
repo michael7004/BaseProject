@@ -148,6 +148,7 @@ public class FeedBackFragment extends BaseFragment {
             }
             if (wsFeedback != null && wsFeedback.getMessage().equalsIgnoreCase(msg)) {
                 Utills.showSnackbarNonSticky(svParent, wsFeedback != null ? wsFeedback.getMessage() : null, true, getActivity());
+                Utills.hideSoftKeyboard(getActivity());
                 etMsgArea.setText("");
 
 
@@ -156,7 +157,6 @@ public class FeedBackFragment extends BaseFragment {
             }
         }
     }
-
 
 
 }

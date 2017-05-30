@@ -3,7 +3,7 @@ package com.example.indianic.baseproject.fragment;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.indianic.baseproject.R;
+import com.example.indianic.baseproject.activity.MainActivity;
 import com.example.indianic.baseproject.adapter.FragmentHomeSubAdapter;
 import com.example.indianic.baseproject.adapter.ViewPagerAdapter;
 import com.example.indianic.baseproject.model.ProductSliderModel;
@@ -57,15 +58,18 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
+        ((MainActivity) getActivity()).setTitle("Home");
         getPromotionaList();
         getProductList();
         intro_images = (ViewPager) view.findViewById(R.id.pager_introduction);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_home_rv_sub_slider);
         pager_indicator = (LinearLayout) view.findViewById(R.id.viewPagerCountDots);
         linearLayout = (LinearLayout) view.findViewById(R.id.fragment_home_ll_parent);
-        LinearLayoutManager horizontalLayoutManagaer
-                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        recyclerView.setLayoutManager(horizontalLayoutManagaer);
+//        LinearLayoutManager horizontalLayoutManagaer
+//                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false);
+       recyclerView.setLayoutManager(gridLayoutManager);
 
     }
 

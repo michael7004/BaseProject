@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/_10sdp"
-    android:padding="@dimen/_5sdp">
+    >
 
     <EditText
         android:id="@+id/fragment_feed_back_et_info_area"
@@ -14,6 +14,8 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/drw_btn_round_corner"
         android:gravity="top|left"
+        android:padding="@dimen/_5sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:inputType="textMultiLine"
         android:lines="6"
         android:overScrollMode="always"
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fragment_feed_back_et_info_area"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/fragment_feedback_btn_submit"
         android:textColor="@color/colorWhite"

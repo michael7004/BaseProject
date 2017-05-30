@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_home_ll_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhite"
     android:orientation="vertical"
     android:padding="@dimen/_5sdp"
-    android:id="@+id/fragment_home_ll_parent"
     android:weightSum="1">
 
     <LinearLayout
@@ -15,6 +15,7 @@
         android:layout_weight="0.5"
         android:background="@drawable/border_home_uper_tabbar"
         android:padding="@dimen/_2sdp">
+
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
@@ -49,8 +50,6 @@
         </RelativeLayout>
 
 
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -63,7 +62,7 @@
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/fragment_home_rv_sub_slider"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
         </android.support.v7.widget.RecyclerView>

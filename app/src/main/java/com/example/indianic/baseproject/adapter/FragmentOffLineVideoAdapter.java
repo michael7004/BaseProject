@@ -1,11 +1,9 @@
 package com.example.indianic.baseproject.adapter;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,9 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.indianic.baseproject.R;
-import com.example.indianic.baseproject.common.CommonDialogFragment;
-import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
-import com.example.indianic.baseproject.fragment.MyDownloadsFragment;
+import com.example.indianic.baseproject.activity.OffLineVideoPlayerActivity;
 import com.example.indianic.baseproject.model.OffLineVideoModel;
 
 import java.io.File;
@@ -40,7 +36,7 @@ public class FragmentOffLineVideoAdapter extends RecyclerView.Adapter<FragmentOf
         this.context = context;
         this.offLineVideoModels = offLineVideoModels;
         this.manager = manager;
-        this.fragment=fragment;
+        this.fragment = fragment;
     }
 
 
@@ -60,21 +56,33 @@ public class FragmentOffLineVideoAdapter extends RecyclerView.Adapter<FragmentOf
             public void onClick(View v) {
 
 
-                if (MyDownloadsFragment.isVideos) {
-//                    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
-                    Bundle args = new Bundle();
-                    args.putString("path", offLineVideoModels.get(position).getPath());
-                    newFragment.setArguments(args);
-                    newFragment.show(fragmentTransaction, "");
 
+                String VideoURL = offLineVideoModels.get(position).getPath();
+                Intent intent = new Intent(context, OffLineVideoPlayerActivity.class);
+                intent.putExtra("VID_PATH_OFF_LINE", VideoURL);
+                context.startActivity(intent);
 
-                } else {
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogFragment.newInstance();
-                    newFragment.show(fragmentTransaction, "");
-                }
+//
+//                if (MyDownloadsFragment.isVideos) {
+////
+////                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+////                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
+////                    Bundle args = new Bundle();
+////                    args.putString("path", offLineVideoModels.get(position).getPath());
+////                    newFragment.setArguments(args);
+////                    newFragment.show(fragmentTransaction, "");
+//
+//                    String VideoURL = offLineVideoModels.get(position).getPath();
+//                    Intent intent = new Intent(context, OffLineVideoPlayerActivity.class);
+//                    intent.putExtra("VID_PATH_OFF_LINE", VideoURL);
+//                    context.startActivity(intent);
+//
+//
+//                } else {
+//                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+//                    final DialogFragment newFragment = CommonDialogFragment.newInstance();
+//                    newFragment.show(fragmentTransaction, "");
+//                }
             }
         });
         holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +105,8 @@ public class FragmentOffLineVideoAdapter extends RecyclerView.Adapter<FragmentOf
                                 if (fdelete.exists()) {
                                     if (fdelete.delete()) {
 
-                                            offLineVideoModels.remove(position);
-                                            notifyDataSetChanged();
+                                        offLineVideoModels.remove(position);
+                                        notifyDataSetChanged();
 
 
                                     } else {

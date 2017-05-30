@@ -3,7 +3,7 @@
     <!-- Splash activity theme. -->
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/colorPrimary</item>
+        <!--<item name="android:windowBackground">@color/colorPrimary</item>-->
 
     </style>
 

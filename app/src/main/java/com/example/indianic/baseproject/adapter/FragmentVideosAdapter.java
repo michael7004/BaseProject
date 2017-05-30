@@ -1,15 +1,12 @@
 package com.example.indianic.baseproject.adapter;
 
-import android.app.DialogFragment;
 import android.app.DownloadManager;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
@@ -23,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
-import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
+import com.example.indianic.baseproject.activity.OnLineVideoPlayerActivity;
 import com.example.indianic.baseproject.fragment.MyVideosFragment;
 import com.example.indianic.baseproject.model.VideosListModel;
 
@@ -36,6 +33,8 @@ import static android.content.Context.DOWNLOAD_SERVICE;
  */
 
 public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAdapter.MyViewHolder> {
+
+//    http://mosaicdesigns.in/assets/videodownloads/8.mp4
 
     private ArrayList<VideosListModel> videosListModels;
 
@@ -75,12 +74,17 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
             public void onClick(View v) {
                 String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
                 if (MyVideosFragment.isVideos) {
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
-                    Bundle args = new Bundle();
-                    args.putString("path", VideoURL);
-                    newFragment.setArguments(args);
-                    newFragment.show(fragmentTransaction, "");
+
+                    Intent intent = new Intent(context, OnLineVideoPlayerActivity.class);
+                    intent.putExtra("VID_PATH",VideoURL);
+                    context.startActivity(intent);
+
+//                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
+//                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
+//                    Bundle args = new Bundle();
+//                    args.putString("path", VideoURL);
+//                    newFragment.setArguments(args);
+//                    newFragment.show(fragmentTransaction, "");
                 } else {
                     String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
@@ -112,7 +116,7 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
                                     Music_DownloadId = DownloadData(music_uri, videosListModels.get(position).getVdid());
                                 } else {
                                     Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
-                                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
+                                    Uri image_uri =        Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
                                     Image_DownloadId = DownloadData(image_uri, videosListModels.get(position).getVdid());
                                 }
                                 break;

@@ -55,6 +55,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void initView() {
         Utills.hideSoftKeyboard(LoginActivity.this);
+//        Utills.hideSoftKeyBoard(this,etEmail);
         svParent = (ScrollView) findViewById(R.id.activity_login_sv_main);
         inputLayoutmail = (TextInputLayout) findViewById(R.id.activity_login_tnl_email);
         inputLayouPassword = (TextInputLayout) findViewById(R.id.activity_login_tnl_password);
@@ -82,7 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (validation()) {
                     final String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                     if (Utills.checkForPermission(LoginActivity.this, WRITE_STORAGE_PERMISSION)) {
-                        login(etEmail.getText().toString(), etPassWord.getText().toString());
+                        login(etEmail.getText().toString().trim(), etPassWord.getText().toString().trim());
 
 //                        startActivity(new Intent(this, MainActivity.class));
 //                        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);

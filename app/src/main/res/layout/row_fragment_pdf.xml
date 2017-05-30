@@ -28,7 +28,7 @@
                 android:id="@+id/row_fragment_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/ic_pdf"
+                android:background="@drawable/ic_unlock_pdf"
                 android:scaleType="centerCrop" />
 
             <LinearLayout
@@ -46,16 +46,17 @@
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_weight="1"
                     android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="Basic Tutorial"
+                    android:maxLines="2"
+                    android:text="Basic Tutorial fsfsfsfsfsf fsfsfsfsfsfsffsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf"
                     android:textColor="@color/colorBlack"
                     card_view:font_name="@string/font_open_sans_bold" />
 
                 <ImageView
                     android:id="@+id/row_fragment_pdf_iv_more_option"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_alignParentEnd="true"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_more_vert_black_24dp" />
             </LinearLayout>
 
