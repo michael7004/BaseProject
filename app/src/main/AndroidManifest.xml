@@ -42,11 +42,12 @@
         <activity
             android:name=".activity.OnLineVideoPlayerActivity"
             android:configChanges="locale|orientation|keyboardHidden|screenSize"
+
             />
         <activity
             android:name=".activity.OffLineVideoPlayerActivity"
             android:configChanges="locale|orientation|keyboardHidden|screenSize"
-             />
+      />
     </application>
 
 </manifest>

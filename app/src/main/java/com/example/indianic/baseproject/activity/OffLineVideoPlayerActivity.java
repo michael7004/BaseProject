@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.MediaController;
 import android.widget.VideoView;
 
@@ -27,9 +29,12 @@ public class OffLineVideoPlayerActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_off_line_video_player);
-        String vidPath= getIntent().getStringExtra("VID_PATH_OFF_LINE");
+        String vidPath = getIntent().getStringExtra("VID_PATH_OFF_LINE");
         //set the media controller buttons
         if (mediaControls == null) {
             mediaControls = new MediaController(OffLineVideoPlayerActivity.this);
