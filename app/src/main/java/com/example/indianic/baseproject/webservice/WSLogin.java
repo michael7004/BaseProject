@@ -21,6 +21,7 @@ public class WSLogin {
     private String email = "";
     private String fullname = "";
 
+
     public String getFullname() {
         return fullname;
     }

@@ -20,10 +20,9 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/nav_neader_main_iv_profile"
             android:layout_width="@dimen/_40sdp"
             android:layout_height="@dimen/_40sdp"
-
             android:src="@drawable/ic_person_black_24dp" />
 
         <com.example.indianic.baseproject.common.CustomTextview

@@ -38,7 +38,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private EditText etEmail;
     private EditText etPassWord;
     private TextView tvForgotPassWord;
-    private TextView tvRegistration;
+
     private Button btnSummit;
     private Button btnFaceBook;
     private ScrollView svParent;
