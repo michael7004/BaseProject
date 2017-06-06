@@ -41,6 +41,7 @@
                     android:id="@+id/row_fragment_off_line_tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="@dimen/_2sdp"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_weight="1"
                     android:ellipsize="end"

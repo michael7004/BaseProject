@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,6 +75,9 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
         if (arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0")) {
 
+            Log.d("test","dl values"+arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0"));
+
+
             holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
             holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_unlock_pdf));
 
@@ -119,7 +123,10 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                 }
             });
 
-        } else {
+        }
+        else  if(arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("1") && !lastWordExtraxtor(arrayListMyPdf.get(position).getExamid()).equalsIgnoreCase("ok") ){
+
+
             holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
             holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_lock_pdf));
             holder.ivProfile.setOnClickListener(new View.OnClickListener() {
@@ -155,6 +162,56 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                                     final DialogFragment newFragment = CommonDialogPdfUnlockFragment.newInstance();
                                     newFragment.show(fragmentTransaction, "");
 
+                                    break;
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+
+                }
+            });
+
+
+        }
+        else if(arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("1") && lastWordExtraxtor(arrayListMyPdf.get(position).getExamid()).equalsIgnoreCase("ok") )
+        {
+
+            holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
+            holder.ivProfile.setBackground(context.getResources().getDrawable(R.drawable.ic_unlock_pdf));
+
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/pdfdownloads/" + arrayListMyPdf.get(position).getDid() + ".pdf");
+                    Global_Postion = arrayListMyPdf.get(position).getDid() + ".pdff";
+                    Pdf_DownloadId = DownloadData(image_uri, arrayListMyPdf.get(position).getDid());
+
+
+                }
+            });
+
+
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu_download);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+
+                            switch (item.getItemId()) {
+                                case R.id.menu1:
+                                    //handle menu1 click
+                                    Uri image_uri_normal = Uri.parse("http://mosaicdesigns.in/assets/pdfdownloads/" + arrayListMyPdf.get(position).getDid() + ".pdf");
+                                    Global_Postion = arrayListMyPdf.get(position).getDid() + ".pdff";
+                                    Pdf_DownloadNormal = DownloadDataNormal(image_uri_normal, arrayListMyPdf.get(position).getDid());
                                     break;
                             }
                             return false;
@@ -249,6 +306,14 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
         //Enqueue download and save the referenceId
         downloadReference = downloadManager.enqueue(request);
         return downloadReference;
+    }
+
+    private String lastWordExtraxtor(String combineStr)
+    {
+
+
+        String lastWord = combineStr.substring(combineStr.lastIndexOf(" ")+1);
+        return lastWord;
     }
 }
 

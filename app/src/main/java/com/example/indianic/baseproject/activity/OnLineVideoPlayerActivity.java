@@ -48,9 +48,9 @@ public class OnLineVideoPlayerActivity extends BaseActivity {
         progressDialog = Utills.showProgressDialogNew(OnLineVideoPlayerActivity.this, getString(R.string.msg_loading), false);
 
         try {
+
             //set the media controller in the VideoView
             myVideoView.setMediaController(mediaControls);
-
             //set the uri of the video to be played
             myVideoView.setVideoURI(Uri.parse(vidPath));
 

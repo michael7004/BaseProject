@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.example.indianic.baseproject.R;
 import com.example.indianic.baseproject.common.CommonDialogPdfLibFragment;
-import com.example.indianic.baseproject.common.CommonDialogVideoFragment;
 import com.example.indianic.baseproject.fragment.MyVideosFragment;
 import com.example.indianic.baseproject.model.VidPdfListModel;
 import com.example.indianic.baseproject.utills.Utills;
@@ -69,7 +67,6 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.row_fragment_vid_pdf, parent, false);
-
         return new MyViewHolder(itemView);
     }
 
@@ -78,64 +75,89 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
 
 
         holder.tvTitle.setText(vidPdfListModels.get(position).getFiletitle());
-        holder.ivProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                Log.d("positon", vidPdfListModels.get(position).getVdid());
-                String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".mp4";
-                if (MyVideosFragment.isVideos) {
-                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
-                    Bundle args = new Bundle();
-                    args.putString("path", VideoURL);
-                    newFragment.setArguments(args);
-                    newFragment.show(fragmentTransaction, "");
-                } else {
-
-//                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf";
-//                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
-//                    context.startActivity(browserIntent);
+        if(vidPdfListModels.get(position).getCommonvideo().equalsIgnoreCase("")) {
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
                     Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf");
                     Global_Postion = vidPdfListModels.get(position).getVdid() + ".pdff";
                     Pdf_DownloadId = DownloadDatanPatch(image_uri, vidPdfListModels.get(position).getVdid());
 
+                }
+            });
+
+
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.menu2:
+                                    //handle menu1 click
+                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
+                                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf");
+                                    Image_DownloadId = DownloadData(image_uri, vidPdfListModels.get(position).getVdid());
+                                    break;
+
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
+        }
+        else
+        {
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getCommonvideo() + ".pdf");
+                    Global_Postion = vidPdfListModels.get(position).getVdid() + ".pdff";
+                    Pdf_DownloadId = DownloadDatanPatch(image_uri, vidPdfListModels.get(position).getVdid());
 
                 }
-
-            }
-        });
+            });
 
 
-        holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu2:
-                                //handle menu1 click
-                                Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
-                                Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getVdid() + ".pdf");
-                                Image_DownloadId = DownloadData(image_uri, vidPdfListModels.get(position).getVdid());
-                                break;
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.menu2:
+                                    //handle menu1 click
+                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
+                                    Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/videodownloads/" + vidPdfListModels.get(position).getCommonvideo() + ".pdf");
+                                    Image_DownloadId = DownloadData(image_uri, vidPdfListModels.get(position).getVdid());
+                                    break;
 
+                            }
+                            return false;
                         }
-                        return false;
-                    }
-                });
-                //displaying the popup
-                popup.show();
-            }
-        });
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
+        }
 
 
     }
@@ -155,8 +177,6 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
             tvTitle = (TextView) view.findViewById(R.id.row_fragment_vid_pdf_tv_title);
             ivProfile = (ImageView) view.findViewById(R.id.row_fragment_vid_pdf_iv_logo);
             ivMoreOption = (ImageView) view.findViewById(R.id.row_fragment_vid_pdf_iv_more_option);
-
-
         }
 
 

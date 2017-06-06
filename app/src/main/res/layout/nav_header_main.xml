@@ -3,17 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_130sdp"
-    android:background="@color/colorAccent"
-    android:orientation="vertical">
+    android:background="@color/colorPrimary"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="@dimen/_5sdp">
 
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitXY"
-        android:src="@drawable/ic_logo_final" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_15sdp"
@@ -21,22 +17,24 @@
 
         <ImageView
             android:id="@+id/nav_neader_main_iv_profile"
-            android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_40sdp"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
             android:src="@drawable/ic_person_black_24dp" />
 
         <com.example.indianic.baseproject.common.CustomTextview
             android:id="@+id/nav_header_main_tv_full_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginLeft="@dimen/_2sdp"
             android:layout_marginTop="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/nav_neader_main_iv_profile"
             android:layout_weight="1"
-            android:paddingLeft="@dimen/_15sdp"
             android:text="umesh nepali"
             android:textColor="@color/colorWhite"
             app:font_name="@string/font_open_sans_bold" />
-
-
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

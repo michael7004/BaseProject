@@ -16,22 +16,17 @@
         card_view:cardElevation="@dimen/_3sdp"
         card_view:cardUseCompatPadding="true">
 
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            >
+            android:orientation="horizontal">
 
             <com.example.indianic.baseproject.common.SquareImageView
                 android:id="@+id/row_fragment_off_line_pdf_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-              android:src="@drawable/ic_unlock_pdf"
-                android:scaleType="centerCrop" />
-
-
-
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_unlock_pdf" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -48,6 +43,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:padding="@dimen/_2sdp"
                     android:text="Basic Tutorial fsfsfsfsfsf fsfsfsfsfsfsffsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf"
                     android:textColor="@color/colorBlack"
                     card_view:font_name="@string/font_open_sans_bold" />
@@ -60,8 +56,6 @@
                     android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_more_vert_black_24dp" />
             </LinearLayout>
-
-
 
 
         </RelativeLayout>

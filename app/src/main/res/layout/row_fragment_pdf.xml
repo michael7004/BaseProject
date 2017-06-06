@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_3sdp"
                     android:layout_weight="1"
+                    android:padding="@dimen/_2sdp"
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:text="Basic Tutorial fsfsfsfsfsf fsfsfsfsfsfsffsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf"

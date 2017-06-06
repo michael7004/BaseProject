@@ -8,21 +8,59 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     tools:openDrawer="start">
 
 
     <include layout="@layout/app_bar_main" />
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorWhite"
         android:layout_gravity="start"
-        android:background="#FFFFFF"
-        app:headerLayout="@layout/nav_header_main"
-        app:itemIconTint="@color/colorPrimaryDark"
-        app:itemTextColor="@color/colorPrimaryDark"
-        app:menu="@menu/activity_main_drawer" />
+        android:fitsSystemWindows="true"
+        app:menu="@menu/activity_main_drawer">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            android:background="@color/colorWhite"
+            android:scrollbars="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhite"
+                android:orientation="vertical">
+
+                <android.support.design.widget.NavigationView
+                    android:id="@+id/nav_view"
+                    android:layout_width="match_parent"
+                    android:background="@color/colorWhite"
+                    android:layout_height="wrap_content"
+                    app:elevation="0dp"
+                    app:headerLayout="@layout/nav_header_main"
+                    app:itemIconTint="@color/colorPrimaryDark"
+                    app:itemTextColor="@color/colorPrimaryDark"
+                    app:menu="@menu/activity_main_drawer">
+                    >
+                </android.support.design.widget.NavigationView>
+
+                <LinearLayout
+
+                    android:background="@color/colorWhite"
+                    android:id="@+id/spacer_to_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical" />
+
+                <include layout="@layout/nav_footer_main"></include>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </android.support.design.widget.NavigationView>
 
 
 </android.support.v4.widget.DrawerLayout>

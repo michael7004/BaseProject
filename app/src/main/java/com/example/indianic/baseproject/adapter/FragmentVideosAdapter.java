@@ -69,66 +69,127 @@ public class FragmentVideosAdapter extends RecyclerView.Adapter<FragmentVideosAd
 
 
         holder.tvTitle.setText(videosListModels.get(position).getFiletitle());
-        holder.ivProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
-                if (MyVideosFragment.isVideos) {
-
-                    Intent intent = new Intent(context, OnLineVideoPlayerActivity.class);
-                    intent.putExtra("VID_PATH",VideoURL);
-                    context.startActivity(intent);
-
-//                    final FragmentTransaction fragmentTransaction = manager.beginTransaction();
-//                    final DialogFragment newFragment = CommonDialogVideoFragment.newInstance();
-//                    Bundle args = new Bundle();
-//                    args.putString("path", VideoURL);
-//                    newFragment.setArguments(args);
-//                    newFragment.show(fragmentTransaction, "");
-                } else {
-                    String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
-                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
-                    context.startActivity(browserIntent);
-                }
-
-            }
-        });
 
 
-        holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //creating a popup menu
-                PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
-                //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu);
-                //adding click listener
-                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.menu2:
-                                //handle menu1 click
-                                if (MyVideosFragment.isVideos) {
-                                    Toast.makeText(context, "Video Download started", Toast.LENGTH_SHORT).show();
-                                    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
-                                    Uri music_uri = Uri.parse(VideoURL);
-                                    Music_DownloadId = DownloadData(music_uri, videosListModels.get(position).getVdid());
-                                } else {
-                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
-                                    Uri image_uri =        Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
-                                    Image_DownloadId = DownloadData(image_uri, videosListModels.get(position).getVdid());
-                                }
-                                break;
+        if (videosListModels.get(position).getCommonvideo().equalsIgnoreCase("")) {
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
+                    if (MyVideosFragment.isVideos) {
 
-                        }
-                        return false;
+                        Intent intent = new Intent(context, OnLineVideoPlayerActivity.class);
+                        intent.putExtra("VID_PATH", VideoURL);
+                        context.startActivity(intent);
+                    } else {
+
+                        String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
+                        context.startActivity(browserIntent);
                     }
-                });
-                //displaying the popup
-                popup.show();
-            }
-        });
+
+                }
+            });
+
+
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.menu2:
+                                    //handle menu1 click
+                                    if (MyVideosFragment.isVideos) {
+                                        Toast.makeText(context, "Video Download started", Toast.LENGTH_SHORT).show();
+                                        String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getVdid() + ".mp4";
+                                        Uri music_uri = Uri.parse(VideoURL);
+                                        Music_DownloadId = DownloadData(music_uri, videosListModels.get(position).getVdid());
+                                    }
+
+//                                else {
+//                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
+//                                    Uri image_uri =        Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
+//                                    Image_DownloadId = DownloadData(image_uri, videosListModels.get(position).getVdid());
+//                                }
+                                    break;
+
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
+        } else {
+
+//            holder.tvTitle.setText(videosListModels.get(position).getFiletitle());
+            holder.ivProfile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getCommonvideo() + ".mp4";
+                    if (MyVideosFragment.isVideos) {
+
+                        Intent intent = new Intent(context, OnLineVideoPlayerActivity.class);
+                        intent.putExtra("VID_PATH", VideoURL);
+                        context.startActivity(intent);
+                    }
+
+//                    else {
+//                        String pdf = "http://mosaicdesigns.in/assets/videodownloads/32.pdf";
+//                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(pdf));
+//                        context.startActivity(browserIntent);
+//                    }
+
+                }
+            });
+
+
+            holder.ivMoreOption.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //creating a popup menu
+                    PopupMenu popup = new PopupMenu(context, holder.ivMoreOption);
+                    //inflating menu from xml resource
+                    popup.inflate(R.menu.options_menu);
+                    //adding click listener
+                    popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            switch (item.getItemId()) {
+                                case R.id.menu2:
+                                    //handle menu1 click
+                                    if (MyVideosFragment.isVideos) {
+                                        Toast.makeText(context, "Video Download started", Toast.LENGTH_SHORT).show();
+                                        String VideoURL = "http://mosaicdesigns.in/assets/videodownloads/" + videosListModels.get(position).getCommonvideo() + ".mp4";
+                                        Uri music_uri = Uri.parse(VideoURL);
+                                        Music_DownloadId = DownloadData(music_uri, videosListModels.get(position).getVdid());
+                                    }
+
+//                                else {
+//                                    Toast.makeText(context, "PDF Download started", Toast.LENGTH_SHORT).show();
+//                                    Uri image_uri =        Uri.parse("http://mosaicdesigns.in/assets/videodownloads/32.pdf");
+//                                    Image_DownloadId = DownloadData(image_uri, videosListModels.get(position).getVdid());
+//                                }
+                                    break;
+
+                            }
+                            return false;
+                        }
+                    });
+                    //displaying the popup
+                    popup.show();
+                }
+            });
+
+        }
 
 
     }

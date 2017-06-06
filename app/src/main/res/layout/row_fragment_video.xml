@@ -25,11 +25,8 @@
                 android:id="@+id/row_fragment_video_iv_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-              android:src="@drawable/ic_video_play"
-                android:scaleType="centerCrop" />
-
-
-
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_video_play" />
 
 
             <LinearLayout
@@ -47,6 +44,7 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:padding="@dimen/_2sdp"
                     android:text="Basic Tutorial fsfsfsfsfsf fsfsfsfsfsfsffsfsfsfsfsfsfsfsfsfsfsfsfsfsfsf"
                     android:textColor="@color/colorBlack"
                     card_view:font_name="@string/font_open_sans_bold" />
