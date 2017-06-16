@@ -14,7 +14,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,7 +74,7 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
 
         if (arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0")) {
 
-            Log.d("test","dl values"+arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0"));
+//            Log.d("test","dl values"+arrayListMyPdf.get(position).getDlprice().equalsIgnoreCase("0"));
 
 
             holder.tvTitle.setText(arrayListMyPdf.get(position).getFiletitle());
@@ -87,8 +86,6 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
                     Uri image_uri = Uri.parse("http://mosaicdesigns.in/assets/pdfdownloads/" + arrayListMyPdf.get(position).getDid() + ".pdf");
                     Global_Postion = arrayListMyPdf.get(position).getDid() + ".pdff";
                     Pdf_DownloadId = DownloadData(image_uri, arrayListMyPdf.get(position).getDid());
-
-
                 }
             });
 
@@ -311,9 +308,11 @@ public class FragmentPdfAdapter extends RecyclerView.Adapter<FragmentPdfAdapter.
     private String lastWordExtraxtor(String combineStr)
     {
 
-
         String lastWord = combineStr.substring(combineStr.lastIndexOf(" ")+1);
         return lastWord;
     }
+
+
+
 }
 

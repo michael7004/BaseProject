@@ -58,15 +58,17 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        ((MainActivity) getActivity()).setTitle("Home");
-        getPromotionaList();
-        getProductList();
+
         intro_images = (ViewPager) view.findViewById(R.id.pager_introduction);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_home_rv_sub_slider);
         pager_indicator = (LinearLayout) view.findViewById(R.id.viewPagerCountDots);
         linearLayout = (LinearLayout) view.findViewById(R.id.fragment_home_ll_parent);
 //        LinearLayoutManager horizontalLayoutManagaer
 //                = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        ((MainActivity) getActivity()).setTitle("Home");
+        getPromotionaList();
+        getProductList();
 
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getActivity(),1,GridLayoutManager.HORIZONTAL,false);
        recyclerView.setLayoutManager(gridLayoutManager);
@@ -128,7 +130,7 @@ public class HomeFragment extends BaseFragment {
                 asynPromotionList.execute();
             }
         } else {
-            Utills.showSnackbarNonSticky(linearLayout, getString(R.string.msg_no_internet), true, getActivity());
+            Utills.showSnackbarNonSticky(linearLayout, this.getString(R.string.msg_no_internet), true, getActivity());
         }
     }
 

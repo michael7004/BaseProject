@@ -213,25 +213,25 @@ public class MyDownloadsFragment extends BaseFragment {
 
 
     private void getVideosList() {
-        if (Utills.isNetworkAvailable(getActivity())) {
+
             if (asyncVideoList != null && asyncVideoList.getStatus() == AsyncTask.Status.PENDING) {
                 asyncVideoList.execute();
             } else if (asyncVideoList == null || asyncVideoList.getStatus() == AsyncTask.Status.FINISHED) {
                 asyncVideoList = new AsyncVideoList();
                 asyncVideoList.execute();
             }
-        }
+
     }
 
     private void getPdfList() {
-        if (Utills.isNetworkAvailable(getActivity())) {
+
             if (asyncPdfList != null && asyncPdfList.getStatus() == AsyncTask.Status.PENDING) {
                 asyncPdfList.execute();
             } else if (asyncPdfList == null || asyncPdfList.getStatus() == AsyncTask.Status.FINISHED) {
                 asyncPdfList = new AsyncPdfList();
                 asyncPdfList.execute();
             }
-        }
+
     }
 
     private class AsyncVideoList extends AsyncTask<Void, Void, ArrayList<OffLineVideoModel>> {
@@ -300,7 +300,6 @@ public class MyDownloadsFragment extends BaseFragment {
                 Utills.dismissProgressDialogNew(progressDialog);
             }
 
-            Log.d("SIZE", String.valueOf(result.size()));
             Log.d("SIZE", String.valueOf(result.size()));
             fragmentOffLinePdfAdapter = new FragmentOffLinePdfAdapter(getActivity(), result, manager);
             recyclerViewOffLine.setLayoutManager(new GridLayoutManager(getActivity(), 3));

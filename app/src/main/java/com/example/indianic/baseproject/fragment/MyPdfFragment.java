@@ -57,11 +57,12 @@ public class MyPdfFragment extends BaseFragment {
     public void initView(View view) {
         ((MainActivity) getActivity()).setTitle("My Pdfs");
 //        ((MainActivity) getActivity()).setTitleColor(ContextCompat.getColor(context, R.color.colorWhite));
-        getPDfList(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
+
         manager = getFragmentManager();
         recyclerViewPdf = (RecyclerView) view.findViewById(R.id.fragment_pdf_rv_main);
         relativeLayout = (RelativeLayout) view.findViewById(R.id.fragment_my_pdf_rl_container);
         tvNoData = (TextView) view.findViewById(R.id.fragment_my_pdf_tv_no_data);
+        getPDfList(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,""));
     }
 
     @Override

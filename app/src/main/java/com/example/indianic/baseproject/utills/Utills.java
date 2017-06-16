@@ -469,7 +469,6 @@ public class Utills {
         try {
             final byte[] key = hexStringToByteArray(Constants.SECRET_KEY);
             final byte[] iv = hexStringToByteArray(Constants.IV);
-
             final Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
             final SecretKeySpec secretKeySpec = new SecretKeySpec(key, "AES");
             final IvParameterSpec ivParameterSpec = new IvParameterSpec(iv);

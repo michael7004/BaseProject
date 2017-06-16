@@ -42,7 +42,6 @@ public class FragmentVidPdfAdapter extends RecyclerView.Adapter<FragmentVidPdfAd
 //    http://mosaicdesigns.in/assets/videodownloads/32.pdf
 
     private ArrayList<VidPdfListModel> vidPdfListModels;
-
     private Context context;
     private FragmentManager manager;
     private String isUnlock = "Unlock";

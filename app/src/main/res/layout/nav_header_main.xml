@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_130sdp"
+    android:layout_height="@dimen/_100sdp"
     android:background="@color/colorPrimary"
     android:gravity="center"
     android:orientation="vertical"
@@ -12,7 +12,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_15sdp"
         android:orientation="horizontal">
 
         <ImageView
@@ -35,6 +34,7 @@
             android:layout_weight="1"
             android:text="umesh nepali"
             android:textColor="@color/colorWhite"
+            android:textSize="15sp"
             app:font_name="@string/font_open_sans_bold" />
     </RelativeLayout>
 </LinearLayout>
