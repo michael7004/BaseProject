@@ -37,9 +37,10 @@
     <string name="pick_file">Pick file</string>
     <string name="toast_pick_file_error">Unable to pick file. Check status of file manager.</string>
     <string name="no_data_found">No data found</string>
-    <string name="TAG_EXIT_WARN_MSG">Are you sure you want to exit ?</string>
-    <string name="TAG_YES">YES</string>
+    TAG_N
     <string name="TAG_NO">NO</string>
     <string name="err_msg_enter_valid_email_msg">Enter valid email id</string>
+    <string name="TAG_EXIT_WARN_MSG">Are you sure you want to exit ?</string>
+    <string name="TAG_YES">Yes</string>
 
 </resources>

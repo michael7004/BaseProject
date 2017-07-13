@@ -41,8 +41,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private View view;
     private TextView tvFullName;
     private ImageView ivProfile;
-    private String path="http://mosaicdesigns.in/assets/registrations/";
-    private String prefix=".jpg";
+    private String path = "http://mosaicdesigns.in/assets/registrations/";
+    private String prefix = ".jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,14 +88,14 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         navigationView.setNavigationItemSelectedListener(this);
         View headerLayout = navigationView.getHeaderView(0);
         tvFullName = (TextView) headerLayout.findViewById(R.id.nav_header_main_tv_full_name);
-        ivProfile= (ImageView) headerLayout.findViewById(R.id.nav_neader_main_iv_profile);
+        ivProfile = (ImageView) headerLayout.findViewById(R.id.nav_neader_main_iv_profile);
         final String strFullName = Preference.getInstance().mSharedPreferences.getString(Constants.PRE_FULL_NAME, "");
         if (!strFullName.equalsIgnoreCase("")) {
             tvFullName.setText(Preference.getInstance().mSharedPreferences.getString(Constants.PRE_FULL_NAME, ""));
 
         }
 
-        path=path+Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID,"")+prefix;
+        path = path + Preference.getInstance().mSharedPreferences.getString(Constants.PRE_USER_ID, "") + prefix;
 
 
         Glide.with(MainActivity.this).load(path).asBitmap().placeholder(R.drawable.ic_person_black_24dp).into(new BitmapImageViewTarget(ivProfile) {
