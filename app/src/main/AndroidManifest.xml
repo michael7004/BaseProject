@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:name=".BaseProjectApplication"
@@ -29,16 +30,10 @@
 
 
         <!-- Main activity -->
-        <activity
-            android:name=".activity.MainActivity"
-            />
-        <activity
-            android:name=".activity.LoginActivity"
-             />
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.LoginActivity" />
 
-        <activity
-            android:name=".activity.ForgotPasswordActivity"
-            />
+        <activity android:name=".activity.ForgotPasswordActivity" />
         <activity
             android:name=".activity.OnLineVideoPlayerActivity"
             android:configChanges="locale|orientation|keyboardHidden|screenSize"
@@ -46,8 +41,7 @@
             />
         <activity
             android:name=".activity.OffLineVideoPlayerActivity"
-            android:configChanges="locale|orientation|keyboardHidden|screenSize"
-      />
+            android:configChanges="locale|orientation|keyboardHidden|screenSize" />
     </application>
 
 </manifest>

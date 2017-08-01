@@ -30,10 +30,14 @@ class WSConstants {
     final String PARAMS_MESSAGE = "message";
     final String PARAMS_CLIENT_CODE = "rname";
     final String PARAMS_PASSWORD = "rpwd";
+    final String PARAMS_DEVICEID = "mdeviceid";
+
+
     final String PARAMS_CLIENT_HASH = "client_hash";
     final String PARAMS_ID = "regid";
     final String PARAMS_FEED_BACK = "feedback";
     final String PARAMS_EXAM_MSG_ID = "examid";
+    final String PARAMS_MSG = "message";
 
 
     final String PARAMS_A_HSIS = "a_hsid";

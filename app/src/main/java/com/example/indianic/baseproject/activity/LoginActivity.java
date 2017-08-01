@@ -43,6 +43,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private Button btnFaceBook;
     private ScrollView svParent;
     private AsyncLogin asyncLogin;
+    private String uniqueId = "";
 
 
     @Override
@@ -50,6 +51,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        uniqueId = Utills.getUniqueDeviceId(this);
+
     }
 
     @Override
@@ -83,7 +86,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (validation()) {
                     final String WRITE_STORAGE_PERMISSION = Manifest.permission.WRITE_EXTERNAL_STORAGE;
                     if (Utills.checkForPermission(LoginActivity.this, WRITE_STORAGE_PERMISSION)) {
-                        login(etEmail.getText().toString().trim(), etPassWord.getText().toString().trim());
+                        login(etEmail.getText().toString().trim(), etPassWord.getText().toString().trim(),uniqueId.trim());
 
 //                        startActivity(new Intent(this, MainActivity.class));
 //                        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
@@ -110,7 +113,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         switch (requestCode) {
             case PERMISSION_REQUEST_WRITE_STORAGE_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    login(etEmail.getText().toString(), etPassWord.getText().toString());
+                    login(etEmail.getText().toString(), etPassWord.getText().toString(),uniqueId);
                 } else {
                     showSnackbarNonSticky(svParent, getString(R.string.err_msg_permission_write_phone), true, LoginActivity.this);
                 }
@@ -132,7 +135,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      *
      * @param clientID
      */
-    private void login(String clientID, String password) {
+    private void login(String clientID, String password,String uniqueId) {
 //        clientID = Utills.encrypt(clientID);
 //        password = Utills.encrypt(password);
         if (Utills.isNetworkAvailable(LoginActivity.this) && !TextUtils.isEmpty(clientID) && !TextUtils.isEmpty(password)) {
@@ -140,7 +143,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 asyncLogin.execute(clientID, password);
             } else if (asyncLogin == null || asyncLogin.getStatus() == AsyncTask.Status.FINISHED) {
                 asyncLogin = new AsyncLogin();
-                asyncLogin.execute(clientID, password);
+                asyncLogin.execute(clientID, password,uniqueId);
             }
         } else {
             Utills.showSnackbarNonSticky(svParent, getString(R.string.msg_no_internet), true, LoginActivity.this);
@@ -187,7 +190,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         @Override
         protected String doInBackground(String... params) {
-            return wsLogin.executeService(params[0], params[1]);
+            return wsLogin.executeService(params[0], params[1],params[2]);
         }
 
         @Override
@@ -206,7 +209,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 finish();
             } else {
-                Utills.showSnackbarNonSticky(svParent, wsLogin != null ? "Email or password wrong" : null, true, LoginActivity.this);
+                Utills.showSnackbarNonSticky(svParent, wsLogin != null ? wsLogin.getMessage() : null, true, LoginActivity.this);
             }
         }
     }

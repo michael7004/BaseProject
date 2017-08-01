@@ -11,14 +11,18 @@ import android.content.SharedPreferences;
 
 public class BaseProjectApplication extends Application {
 
+    private String TAG=BaseProjectApplication.class.getSimpleName();
     public static final boolean IS_APP_OPEN =true ;
     public static BaseProjectApplication mAppInstance;
     public SharedPreferences mSharedPreferences;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mAppInstance = this;
         mSharedPreferences = getSharedPreferences(this.getResources().getString(R.string.app_name), Context.MODE_PRIVATE);
+
+
 
 
     }

@@ -26,8 +26,6 @@ public abstract class BaseFragmentUtil extends Fragment implements View.OnClickL
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initializeComponent(view);
-
-
     }
 
 
